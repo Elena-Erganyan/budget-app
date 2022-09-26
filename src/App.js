@@ -1,18 +1,19 @@
-import './App.css';
-import NewTransaction from './components/NewTransaction';
+import React from 'react';
+import Balance from './components/Balance';
+import Header from './components/Header';
+import TransactionForm from './components/TransactionForm';
 import TransactionHistory from './components/TransactionHistory';
+
+import { GlobalProvider } from './context/globalState';
 
 function App() {
   return (
-    <div className="App">
-      <div>Your balance: 100$</div>
-      <div>
-        <div>Income: 500$</div>
-        <div>Expenses: 400$</div>
-      </div>
+    <GlobalProvider>
+      <Header />
+      <Balance />
       <TransactionHistory />
-      <NewTransaction />
-    </div>
+      <TransactionForm />
+    </GlobalProvider>
   );
 }
 
