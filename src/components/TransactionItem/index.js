@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTransactionContext } from '../../context/globalState';
 import Button from '../Button';
-import NewTransaction from '../NewTransaction';
+import TransactionForm from '../TransactionForm';
 import { StyledTransactionItem } from './styled';
 
 const TransactionItem = ({item}) => {
@@ -18,12 +18,12 @@ const TransactionItem = ({item}) => {
         <span>{date}</span><span>{title}</span><span>{sign}${amount}</span>
       </div>
       <div>
-        <Button color={color} onClick={() => setReadOnly(false)}>Edit</Button>
-        <Button color={color} onClick={() => deleteTransaction(id)} primary>Delete</Button>
+        <Button color={color} onClick={() => setReadOnly(false)} primary>Edit</Button>
+        <Button color={color} onClick={() => deleteTransaction(id)}>Delete</Button>
       </div>
     </StyledTransactionItem>
   ) : (
-    <NewTransaction item={item} setReadOnly={setReadOnly} />
+    <TransactionForm item={item} setReadOnly={setReadOnly} />
   )
 };
 
