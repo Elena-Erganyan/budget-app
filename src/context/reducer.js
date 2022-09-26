@@ -16,7 +16,10 @@ export default function reducer(state, action) {
     case 'REPLACE_TRANSACTION':
       return {
           ...state,
-          transactions: state.transactions.map(item => item.id === action.payload.id ? action.payload.newItem : item).sort((a, b) => a.date < b.date ? -1 : a.date > b.date ? 1 : 0),
+          transactions: 
+            state.transactions
+            .map(item => item.id === action.payload.id ? action.payload.newItem : item)
+            .sort((a, b) => a.date < b.date ? -1 : a.date > b.date ? 1 : 0),
         }
     default:
       return state;
