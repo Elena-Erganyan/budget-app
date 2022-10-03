@@ -11,12 +11,21 @@ import {
 import Button from '../Button';
 
 const TransactionForm = ({item, setReadOnly}) => {
+  
   const [date, setDate] = useState((item && item.date) || new Date().toISOString().split('T')[0]);
   const [title, setTitle] = useState((item && item.title) || '');
   const [amount, setAmount] = useState((item && item.amount) || '');
-  const [type, setType] = useState((item && item.type) || 'income');
+  const [type, setType] = useState((item && item.type) || 'Income');
+  const [category, setCategory] = useState((item && item.category) || 'Salary');
 
-  const { addTransaction, replaceTransaction } = useTransactionContext();
+  const { addTransaction, replaceTransaction, incomeCategories, expenseCategories } = useTransactionContext();
+
+  const categories = type === 'Income' ? incomeCategories : expenseCategories;
+
+  const typeHandler = (type) => {
+    setType(type);
+    setCategory(type === 'Income' ? 'Salary' : 'Food');
+  };
 
   const onSubmit = (evt) => {
     evt.preventDefault();
@@ -24,6 +33,7 @@ const TransactionForm = ({item, setReadOnly}) => {
       id: item ? item.id : uuidv4(),
       date,
       type,
+      category,
       title,
       amount,
     };
@@ -36,7 +46,8 @@ const TransactionForm = ({item, setReadOnly}) => {
       setDate(new Date().toISOString().split('T')[0]);
       setTitle('');
       setAmount('');
-      setType('income');
+      setType('Income');
+      setCategory('Salary');
     } 
   };
 
@@ -83,10 +94,10 @@ const TransactionForm = ({item, setReadOnly}) => {
             <div>
               <StyledTransactionInput
                 id="income"
-                checked={type === 'income'}
+                checked={type === 'Income'}
                 color="#4C8D26"
                 name="type"
-                onChange={() => setType("income")}
+                onChange={() => typeHandler("Income")}
                 type="radio"
               />
               <StyledTransactionLabel color="#4C8D26" htmlFor="income" isSwitch>Income</StyledTransactionLabel>
@@ -94,15 +105,21 @@ const TransactionForm = ({item, setReadOnly}) => {
             <div>
               <StyledTransactionInput
                 id="expense"
-                checked={type === 'expense'}
+                checked={type === 'Expense'}
                 color="#882380"
                 name="type"
-                onChange={() => setType("expense")}
+                onChange={() => typeHandler("Expense")}
                 type="radio"
               />
               <StyledTransactionLabel color="#882380" htmlFor="expense" isSwitch>Expense</StyledTransactionLabel>
             </div>
           </div>
+          <StyledTransactionLabel>
+            Category
+            <StyledTransactionInput as="select" value={category} onChange={(evt) => setCategory(evt.target.value)}>
+              {categories.map((category, i) => <option key={i}>{category}</option>)}
+            </StyledTransactionInput>
+          </StyledTransactionLabel>
         {item ?
           <div>
             <Button color="#DE60CA" onClick={() => setReadOnly(true)} type="button">Cancel</Button>

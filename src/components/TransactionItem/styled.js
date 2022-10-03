@@ -25,3 +25,14 @@ export const StyledTransactionItem = styled.div`
     flex-direction: column;
   }
 `;
+
+export const StyledTransactionCategory = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+  span {
+    color: ${props => props.color};
+    text-align: center;
+  }
+`;

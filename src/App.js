@@ -1,19 +1,22 @@
 import React from 'react';
-import Balance from './components/Balance';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import TransactionForm from './components/TransactionForm';
-import TransactionHistory from './components/TransactionHistory';
+import Home from './components/Home';
+import ManageTransactions from './components/ManageTransactions';
 
 import { GlobalProvider } from './context/globalState';
 
 function App() {
   return (
-    <GlobalProvider>
-      <Header />
-      <Balance />
-      <TransactionHistory />
-      <TransactionForm />
-    </GlobalProvider>
+    <BrowserRouter>
+      <GlobalProvider>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/manage-transactions" element={<ManageTransactions />} />
+        </Routes>
+      </GlobalProvider>
+    </BrowserRouter>
   );
 }
 

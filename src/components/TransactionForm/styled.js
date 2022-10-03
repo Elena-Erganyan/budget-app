@@ -22,12 +22,13 @@ export const StyledTransactionForm = styled.form`
   div {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     gap: 2rem;
   }
   @media (max-width: 500px) {
     div {
       flex-direction: column;
+      align-items: center;
       div {
         flex-direction: row;
       }
@@ -39,8 +40,7 @@ export const StyledTransactionLabel = styled.label`
   font-size: 1.5rem;
   line-height: 1.2;
   ${({isSwitch, color}) => isSwitch ?
-    css`width: 100%;
-      background-color: white;
+    css`background-color: white;
       color: ${color};
       border: 0.2rem solid ${color};
       border-radius: 0.3rem;
@@ -63,6 +63,7 @@ export const StyledTransactionInput = styled.input`
   font-size: 1.5rem;
   line-height: 1.2;
   padding: 0.5rem;
+  background-color: white;
   color: #223C20;
   border: 1px solid #223C20;
   border-radius: 0.3rem;
