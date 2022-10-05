@@ -8,12 +8,16 @@ const Navbar = () => {
   return (
     <StyledNavbar>
       <StyledLink
-        status={location.pathname === '/' ? 'active' : null}
-        to="/">Home
+        disabled={location.pathname === '/'}
+        to="/"
+      >
+        Home
       </StyledLink>
       <StyledLink
-        status={location.pathname === '/manage-transactions' ? 'active' : null}
-        to="/manage-transactions">Manage transactions
+        disabled={location.pathname === '/manage-transactions'}
+        to="/manage-transactions"
+      >
+        Manage transactions
       </StyledLink>
     </StyledNavbar>
   );

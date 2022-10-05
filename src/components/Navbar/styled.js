@@ -15,5 +15,6 @@ export const StyledLink = styled(Link)`
   line-height: 1.2;
   text-decoration: none;
   text-align: center;
-  color: ${props => props.status === 'active' ? '#882380' : '#DE60CA'};
+  color: ${({disabled}) => disabled ? '#882380' : '#DE60CA'};
+  cursor: ${({disabled}) => disabled ? 'auto' : 'pointer'};
 `;

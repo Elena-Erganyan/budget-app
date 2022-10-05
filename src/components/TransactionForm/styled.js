@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const StyledTransactionWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${props => props.item ? '100%' : '90%'};
+  width: ${({item}) => item ? '100%' : '90%'};
   max-width: 70rem;
   margin-bottom: 2rem;
   color: #223C20;
@@ -86,7 +86,7 @@ export const StyledTransactionInput = styled.input`
     outline: 2px solid #223C20;
   }
   &[type='radio']:checked + label {
-    background-color: ${props => props.color};
+    background-color: ${({color}) => color};
     color: white;
   }
 `;
