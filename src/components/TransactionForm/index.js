@@ -10,7 +10,7 @@ import {
 } from './styled';
 import Button from '../Button';
 
-const TransactionForm = ({item, setReadOnly}) => {
+const TransactionForm = ({item, setItemsToEdit}) => {
   
   const [date, setDate] = useState((item && item.date) || new Date().toISOString().split('T')[0]);
   const [title, setTitle] = useState((item && item.title) || '');
@@ -40,7 +40,7 @@ const TransactionForm = ({item, setReadOnly}) => {
 
     if (item) {
       replaceTransaction(item.id, transaction);
-      setReadOnly(true);
+      setItemsToEdit(prevState => prevState.filter((oldId) => oldId !== item.id))
     } else {
       addTransaction(transaction);
       setDate(new Date().toISOString().split('T')[0]);
@@ -91,28 +91,36 @@ const TransactionForm = ({item, setReadOnly}) => {
         </div>
         <div>
           <div>
-            <div>
-              <StyledTransactionInput
-                id="income"
-                checked={type === 'Income'}
-                color="#4C8D26"
-                name="type"
-                onChange={() => typeHandler("Income")}
-                type="radio"
-              />
-              <StyledTransactionLabel color="#4C8D26" htmlFor="income" isSwitch>Income</StyledTransactionLabel>
-            </div>
-            <div>
-              <StyledTransactionInput
-                id="expense"
-                checked={type === 'Expense'}
-                color="#882380"
-                name="type"
-                onChange={() => typeHandler("Expense")}
-                type="radio"
-              />
-              <StyledTransactionLabel color="#882380" htmlFor="expense" isSwitch>Expense</StyledTransactionLabel>
-            </div>
+            <StyledTransactionInput
+              id={item ? "income" + item.id : "income"}
+              checked={type === 'Income'}
+              color="#4C8D26"
+              name={item ? "type" + item.id : "type"}
+              onChange={() => typeHandler("Income")}
+              type="radio"
+            />
+            <StyledTransactionLabel
+              color="#4C8D26"
+              htmlFor={item ? "income" + item.id : "income"}
+              isSwitch
+            >
+              Income
+            </StyledTransactionLabel>
+            <StyledTransactionInput
+              id={item ? "expense" + item.id : "expense"}
+              checked={type === 'Expense'}
+              color="#882380"
+              name={item ? "type" + item.id : "type"}
+              onChange={() => typeHandler("Expense")}
+              type="radio"
+            />
+            <StyledTransactionLabel
+              color="#882380"
+              htmlFor={item ? "expense" + item.id : "expense"}
+              isSwitch
+            >
+              Expense
+            </StyledTransactionLabel>
           </div>
           <StyledTransactionLabel>
             Category
@@ -122,7 +130,13 @@ const TransactionForm = ({item, setReadOnly}) => {
           </StyledTransactionLabel>
         {item ?
           <div>
-            <Button color="#DE60CA" onClick={() => setReadOnly(true)} type="button">Cancel</Button>
+            <Button
+              color="#DE60CA"
+              onClick={() => setItemsToEdit(prevState => prevState.filter((oldId) => oldId !== item.id))}
+              type="button"
+            >
+              Cancel
+            </Button>
             <Button color="#DE60CA" primary>Save changes</Button>
           </div>
           : <Button color="#DE60CA" primary>Add transaction</Button>}

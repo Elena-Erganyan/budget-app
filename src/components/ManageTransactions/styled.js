@@ -14,6 +14,12 @@ export const StyledManageTransactionsWrapper = styled.div`
 export const StyledManageTransactionsForm = styled(StyledTransactionForm)`
   margin-bottom: 2rem;
   width: 90%;
+  div {
+    justify-content: center;
+  }
+  label {
+    flex-grow: 1;
+  }
 `;
 
 export const StyledManageTransactions = styled.div`

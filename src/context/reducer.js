@@ -21,6 +21,11 @@ export default function reducer(state, action) {
             .map(item => item.id === action.payload.id ? action.payload.newItem : item)
             .sort((a, b) => a.date < b.date ? -1 : a.date > b.date ? 1 : 0),
         }
+    case 'SAVE_FILTERS':
+      return {
+        ...state,
+        filters: action.payload,
+      }
     default:
       return state;
   }

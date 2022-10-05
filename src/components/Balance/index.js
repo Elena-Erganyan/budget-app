@@ -4,8 +4,18 @@ import { StyledBalance, StyledIncomeExpenses, StyledIncome, StyledExpenses } fro
 
 const Balance = () => {
   const { transactions } = useTransactionContext();
-  const income = transactions.filter((item) => item.type === 'Income').reduce((sum, item) => sum += item.amount, 0).toFixed(2);
-  const expenses = transactions.filter((item) => item.type === 'Expense').reduce((sum, item) => sum += item.amount, 0).toFixed(2);
+  const income = transactions.reduce((sum, item) => {
+    if (item.type === 'Income') {
+      sum += item.amount;
+    }
+    return sum;
+  }, 0).toFixed(2);
+  const expenses = transactions.reduce((sum, item) => {
+    if (item.type === 'Expense') {
+      sum += item.amount;
+    }
+    return sum;
+  }, 0).toFixed(2);
   const balance = (income - expenses);
   const sign = balance < 0 ? '-' : '';
 

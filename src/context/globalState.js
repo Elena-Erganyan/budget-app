@@ -18,31 +18,7 @@ const initialState = {
       type: 'Expense',
       category: 'Food',
       title: 'Food',
-      amount: 250,
-    },
-    {
-      id: 3,
-      date: '2022-09-15',
-      type: 'Expense',
-      category: 'Transportation',
-      title: 'Transportation',
       amount: 150,
-    },
-    {
-      id: 4,
-      date: '2022-09-15',
-      type: 'Income',
-      category: 'Gift',
-      title: 'Gift',
-      amount: 50,
-    },
-    {
-      id: 5,
-      date: '2022-09-25',
-      type: 'Expense',
-      category: 'Food',
-      title: 'Vegetables',
-      amount: 30,
     },
   ],
   incomeCategories: [
@@ -70,6 +46,13 @@ const initialState = {
     'Internet': 'Globe',
     'Mobile service': 'DeviceMobile',
     'Other expenses': 'Receipt',
+  },
+  filters: {
+    type: 'Income',
+    category: 'All',
+    startDate: new Date().toISOString().split('T')[0],
+    endDate: new Date().toISOString().split('T')[0],
+    sortType: 'dateDesc',
   },
 };
 
@@ -99,6 +82,13 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
+  function saveFilters(filters) {
+    dispatch({
+      type: 'SAVE_FILTERS',
+      payload: filters,
+    });
+  }
+
   return (
     <GlobalContext.Provider value={{
       transactions: state.transactions,
@@ -108,6 +98,8 @@ export const GlobalProvider = ({ children }) => {
       deleteTransaction,
       addTransaction,
       replaceTransaction,
+      filters: state.filters,
+      saveFilters,
     }}>
       {children}
     </GlobalContext.Provider>

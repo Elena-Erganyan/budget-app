@@ -1,91 +1,59 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useTransactionContext } from '../../context/globalState';
-import Button from '../Button';
 import TransactionItem from '../TransactionItem';
+import TransactionForm from '../TransactionForm';
+import { filterTransactions } from './utils';
 import { StyledTransactionLabel, StyledTransactionInput } from '../TransactionForm/styled';
 import { StyledManageTransactionsWrapper, StyledManageTransactions, StyledManageTransactionsForm } from './styled';
 
-const Categories = () => {
-  const [type, setType] = useState('Income');
-  const [category, setCategory] = useState('All');
-  const [startDate, setStartDate] = useState(new Date().toISOString().split('T')[0]);
-  const [endDate, setEndDate] = useState(new Date().toISOString().split('T')[0]);
-  const [sortType, setSortType] = useState('dateDesc');
-  const [filteredTransactions, setFilteredTransactions] = useState([]);
+const ManageTransactions = () => {
+  const { transactions, incomeCategories, expenseCategories, filters, saveFilters } = useTransactionContext();
   
-  const { transactions, incomeCategories, expenseCategories } = useTransactionContext();
+  const [type, setType] = useState(filters.type);
+  const [category, setCategory] = useState(filters.category);
+  const [startDate, setStartDate] = useState(filters.startDate);
+  const [endDate, setEndDate] = useState(filters.endDate);
+  const [sortType, setSortType] = useState(filters.sortType);
+  const [filteredTransactions, setFilteredTransactions] = useState([]);
+  const [itemsToEdit, setItemsToEdit] = useState([]);
+  
   const categories = type === 'Income' ? incomeCategories : expenseCategories;
 
   useEffect(() => {
-    filterTransactions();
+    filterTransactions(setFilteredTransactions, transactions, category, type, startDate, endDate, sortType);
+    saveFilters({type, category, startDate, endDate, sortType});
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [transactions]);
+  }, [transactions, type, category, startDate, endDate, sortType]);
 
   const typeHandler = (type) => {
     setType(type);
     setCategory('All');
   };
 
-  const filterTransactions = () => {
-    if (category === 'All') {
-      setFilteredTransactions(transactions.filter((item) => {
-        return type === item.type && item.date >= startDate && item.date <= endDate;
-      }).sort((a, b) => sortTransactions(a, b, sortType)));
-    } else {
-      setFilteredTransactions(transactions.filter((item) => {
-        return category === item.category && item.date >= startDate && item.date <= endDate;
-      }).sort((a, b) => sortTransactions(a, b, sortType)));
-    }
-  };
-
-  const sortTransactions = (a, b, sortType) => {
-    switch(sortType) {
-      case 'dateAsc':
-        return a.date < b.date ? 1 : a.date > b.date ? -1 : 0;
-      case 'dateDesc':
-        return a.date < b.date ? -1 : a.date > b.date ? 1 : 0;
-      case 'amountAsc':
-        return a.amount - b.amount;
-      case 'amountDesc':
-        return b.amount - a.amount;
-      default:
-        return;
-    }
-  };
-
-  const onSubmit = (evt) => {
-    evt.preventDefault();
-    filterTransactions();
-  };
-
   return (
     <StyledManageTransactionsWrapper>
-      <StyledManageTransactionsForm onSubmit={(evt) => onSubmit(evt)}>
+      <StyledManageTransactionsForm>
         <div>
           <div>
-            <div>
-              <StyledTransactionInput
-                id="income"
-                checked={type === 'Income'}
-                color="#4C8D26"
-                name="type"
-                onChange={() => typeHandler("Income")}
-                type="radio"
-              />
-              <StyledTransactionLabel color="#4C8D26" htmlFor="income" isSwitch>Income</StyledTransactionLabel>
-            </div>
-            <div>
-              <StyledTransactionInput
-                id="expense"
-                checked={type === 'Expense'}
-                color="#882380"
-                name="type"
-                onChange={() => typeHandler("Expense")}
-                type="radio"
-              />
-              <StyledTransactionLabel color="#882380" htmlFor="expense" isSwitch>Expense</StyledTransactionLabel>
-            </div>
+            <StyledTransactionInput
+              id="incomeFilter"
+              checked={type === 'Income'}
+              color="#4C8D26"
+              name="transactionType"
+              onChange={() => typeHandler("Income")}
+              type="radio"
+            />
+            <StyledTransactionLabel color="#4C8D26" htmlFor="incomeFilter" isSwitch>Income</StyledTransactionLabel>
+            <StyledTransactionInput
+              id="expenseFilter"
+              checked={type === 'Expense'}
+              color="#882380"
+              name="transactionType"
+              onChange={() => typeHandler("Expense")}
+              type="radio"
+            />
+            <StyledTransactionLabel color="#882380" htmlFor="expenseFilter" isSwitch>Expense</StyledTransactionLabel>
           </div>
           <StyledTransactionLabel>
             From
@@ -101,32 +69,44 @@ const Categories = () => {
             Category
             <StyledTransactionInput as="select" value={category} onChange={(evt) => setCategory(evt.target.value)}>
               <option value="All">All categories</option>
-              {categories.map((category, i) => <option key={i + 1}>{category}</option>)}
+              {categories.map((category, i) => <option key={i}>{category}</option>)}
             </StyledTransactionInput>
           </StyledTransactionLabel>
           <StyledTransactionLabel>
             Sort by
             <StyledTransactionInput as="select" value={sortType} onChange={(evt) => setSortType(evt.target.value)}>
-              <option key={0} value="dateDesc">Date (oldest)</option>
-              <option key={1} value="dateAsc">Date (newest)</option>
-              <option key={2} value="amountAsc">Amount (lowest)</option>
-              <option key={3} value="amountDesc">Amount (highest)</option>
+              <option value="dateDesc">Date (oldest)</option>
+              <option value="dateAsc">Date (newest)</option>
+              <option value="amountAsc">Amount (lowest)</option>
+              <option value="amountDesc">Amount (highest)</option>
             </StyledTransactionInput>
           </StyledTransactionLabel>
-          <Button color="#DE60CA" primary>Show transactions</Button>
         </div>
       </StyledManageTransactionsForm>
       <StyledManageTransactions>
         {filteredTransactions.length > 0
-        ? filteredTransactions.map((item) =>
-          <TransactionItem
-            item={item}
-            key={item.id}
-          />)
+        ? filteredTransactions.map((item) => {
+          if (itemsToEdit.includes(item.id)) {
+            return (
+              <TransactionForm
+                item={item}
+                key={item.id}
+                setItemsToEdit={setItemsToEdit}
+              />
+            );
+          } else {
+            return (
+              <TransactionItem
+                item={item}
+                key={item.id}
+                setItemsToEdit={setItemsToEdit}
+              />
+            );
+          }})
         : <div>No transactions with the selected parameters</div>}
       </StyledManageTransactions>
     </StyledManageTransactionsWrapper>
   );
 };
 
-export default Categories;
+export default ManageTransactions;

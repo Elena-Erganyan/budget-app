@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const StyledNavbar = styled.nav`
@@ -6,15 +7,13 @@ export const StyledNavbar = styled.nav`
   align-items: center;
   gap: 2rem;
   padding: 1rem;
-  a {
-    padding: 1rem;
-    font-size: 2rem;
-    line-height: 1.2;
-    text-decoration: none;
-    text-align: center;
-    color: #DE60CA;
-  }
-  a.active {
-    color: #882380;
-  }
+`;
+
+export const StyledLink = styled(Link)`
+  padding: 1rem;
+  font-size: 2rem;
+  line-height: 1.2;
+  text-decoration: none;
+  text-align: center;
+  color: ${props => props.status === 'active' ? '#882380' : '#DE60CA'};
 `;

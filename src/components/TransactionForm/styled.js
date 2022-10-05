@@ -16,6 +16,7 @@ export const StyledTransactionHeader = styled.h2`
 `;
   
 export const StyledTransactionForm = styled.form`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -24,6 +25,9 @@ export const StyledTransactionForm = styled.form`
     justify-content: space-between;
     align-items: flex-end;
     gap: 2rem;
+    div {
+      position: relative;
+    }
   }
   @media (max-width: 500px) {
     div {
@@ -69,7 +73,17 @@ export const StyledTransactionInput = styled.input`
   border-radius: 0.3rem;
 
   &[type='radio'] {
-    display: none;
+    position: absolute;
+    left: 1rem;
+    z-index: -1;
+    width: 0;
+    height: 0;
+    &:focus {
+      border: none;
+    }
+  }
+  &[type="radio"]:focus-visible + label {
+    outline: 2px solid #223C20;
   }
   &[type='radio']:checked + label {
     background-color: ${props => props.color};
