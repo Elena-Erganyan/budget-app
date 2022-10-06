@@ -57,11 +57,19 @@ const ManageTransactions = () => {
           </div>
           <StyledTransactionLabel>
             From
-            <StyledTransactionInput onChange={(evt) => setStartDate(evt.target.value)} type="date" value={startDate} />
+            <StyledTransactionInput
+              onChange={(evt) => setStartDate(evt.target.value)}
+              type="date"
+              value={startDate} 
+            />
           </StyledTransactionLabel>
           <StyledTransactionLabel>
             To
-            <StyledTransactionInput onChange={(evt) => setEndDate(evt.target.value)} type="date" value={endDate} />
+            <StyledTransactionInput
+              onChange={(evt) => setEndDate(evt.target.value)}
+              type="date"
+              value={endDate} 
+            />
           </StyledTransactionLabel>
         </div>
         <div>

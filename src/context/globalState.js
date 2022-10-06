@@ -6,19 +6,19 @@ const initialState = {
   transactions: [
     {
       id: 1,
-      date: '2022-09-10',
-      type: 'Income',
-      category: 'Salary',
-      title: 'Cash',
-      amount: 600,
-    },
-    {
-      id: 2,
-      date: '2022-09-12',
+      date: new Date('2022-09-12').getTime(),
       type: 'Expense',
       category: 'Food',
       title: 'Food',
       amount: 150,
+    },
+    {
+      id: 2,
+      date: new Date('2022-09-10').getTime(),
+      type: 'Income',
+      category: 'Salary',
+      title: 'Cash',
+      amount: 600,
     },
   ],
   incomeCategories: [

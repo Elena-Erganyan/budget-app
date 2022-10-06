@@ -21,7 +21,9 @@ const TransactionItem = ({item, setItemsToEdit}) => {
         <span>{category}</span>
       </StyledTransactionCategory>
       <div>
-        <span>{date}</span><span>{title}</span><span style={{color: color}}>{sign}${amount}</span>
+        <span>{new Date(date).toISOString().split('T')[0]}</span>
+        <span>{title}</span>
+        <span style={{color: color}}>{sign}${amount}</span>
       </div>
       <div>
         <Pencil

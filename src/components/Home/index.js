@@ -8,8 +8,8 @@ const Home = () => {
   return (
     <StyledHome>
       <Balance />
-      <TransactionHistory />
       <TransactionForm />
+      <TransactionHistory />
     </StyledHome>
   );
 };

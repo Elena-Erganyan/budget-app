@@ -11,7 +11,7 @@ export default function reducer(state, action) {
         transactions: [
           ...state.transactions,
           action.payload,
-        ].sort((a, b) => a.date < b.date ? -1 : a.date > b.date ? 1 : 0),
+        ].sort((a, b) => b.date - a.date),
       }
     case 'REPLACE_TRANSACTION':
       return {
@@ -19,7 +19,7 @@ export default function reducer(state, action) {
           transactions: 
             state.transactions
             .map(item => item.id === action.payload.id ? action.payload.newItem : item)
-            .sort((a, b) => a.date < b.date ? -1 : a.date > b.date ? 1 : 0),
+            .sort((a, b) => b.date - a.date),
         }
     case 'SAVE_FILTERS':
       return {

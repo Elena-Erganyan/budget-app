@@ -12,7 +12,7 @@ import Button from '../Button';
 
 const TransactionForm = ({item, setItemsToEdit}) => {
   
-  const [date, setDate] = useState((item && item.date) || new Date().toISOString().split('T')[0]);
+  const [date, setDate] = useState((item && item.date) || Date.now());
   const [title, setTitle] = useState((item && item.title) || '');
   const [amount, setAmount] = useState((item && item.amount) || '');
   const [type, setType] = useState((item && item.type) || 'Income');
@@ -43,7 +43,7 @@ const TransactionForm = ({item, setItemsToEdit}) => {
       setItemsToEdit(prevState => prevState.filter((oldId) => oldId !== item.id))
     } else {
       addTransaction(transaction);
-      setDate(new Date().toISOString().split('T')[0]);
+      setDate(Date.now());
       setTitle('');
       setAmount('');
       setType('Income');
@@ -61,11 +61,11 @@ const TransactionForm = ({item, setItemsToEdit}) => {
           <StyledTransactionLabel>
             Date
             <StyledTransactionInput
-              onChange={(evt) => setDate(evt.target.value)}
+              onChange={(evt) => setDate(evt.target.valueAsNumber)}
               pattern="\d{4}-\d{2}-\d{2}"
               required
               type="date"
-              value={date}
+              value={new Date(date).toISOString().split('T')[0]}
             />
           </StyledTransactionLabel>
           <StyledTransactionLabel>
