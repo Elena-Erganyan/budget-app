@@ -48,11 +48,8 @@ const TransactionForm = ({item, setItemsToEdit}) => {
       setItemsToEdit(prevState => prevState.filter((oldId) => oldId !== item.id))
     } else {
       addTransaction(transaction);
-      setDate(Date.now());
       setTitle('');
       setAmount('');
-      setType('Income');
-      setCategory('Salary');
     } 
   };
 

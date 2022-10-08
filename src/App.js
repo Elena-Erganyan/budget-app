@@ -1,8 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import Home from './components/Home';
-import ManageTransactions from './components/ManageTransactions';
+import Home from './pages/Home';
+import ManageTransactions from './pages/ManageTransactions';
 import { GlobalProvider } from './context/globalState';
 
 function App() {

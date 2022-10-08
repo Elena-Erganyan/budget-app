@@ -1,7 +1,7 @@
 import React from 'react';
-import Balance from '../Balance';
-import TransactionForm from '../TransactionForm';
-import TransactionHistory from '../TransactionHistory';
+import Balance from '../../components/Balance';
+import TransactionForm from '../../components/TransactionForm';
+import TransactionHistory from '../../components/TransactionHistory';
 import { StyledHome } from './styled';
 
 const Home = () => {

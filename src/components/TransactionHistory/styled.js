@@ -11,8 +11,4 @@ export const StyledTransactionHistory = styled.div`
     font-size: 2rem;
     line-height: 1.5;
   }
-  div {
-    font-size: 1.5rem;
-    line-height: 1.2;
-  }
 `;

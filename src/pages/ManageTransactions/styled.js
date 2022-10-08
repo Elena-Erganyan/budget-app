@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { fadeIn } from '../generalAnimations';
-import { StyledTransactionForm } from '../TransactionForm/styled';
+import { fadeIn } from '../../components/generalAnimations';
 
 export const StyledManageTransactionsWrapper = styled.div`
   display: flex;
@@ -11,14 +10,6 @@ export const StyledManageTransactionsWrapper = styled.div`
   font-size: 1.5rem;
   line-height: 1.2;
   animation: 0.5s ${fadeIn} forwards;
-`;
-
-export const StyledManageTransactionsForm = styled(StyledTransactionForm)`
-  margin-bottom: 2rem;
-  width: 90%;
-  div {
-    justify-content: center;
-  }
 `;
 
 export const StyledManageTransactions = styled.div`

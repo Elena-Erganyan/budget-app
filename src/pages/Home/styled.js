@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { fadeIn } from '../generalAnimations';
+import { fadeIn } from '../../components/generalAnimations';
 
 export const StyledHome = styled.div`
   display: flex;
