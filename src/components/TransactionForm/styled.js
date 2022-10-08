@@ -4,8 +4,7 @@ export const StyledTransactionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: ${({item}) => item ? '100%' : '90%'};
-  max-width: 70rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   color: #223C20;
 `;
   
@@ -27,7 +26,13 @@ export const StyledTransactionForm = styled.form`
     gap: 2rem;
     div {
       position: relative;
+      width: 33%;
     }
+  }
+  button {
+    flex-grow: 1;
+    width: 33%;
+    min-height: 3.4rem;
   }
   @media (max-width: 500px) {
     div {
@@ -35,7 +40,11 @@ export const StyledTransactionForm = styled.form`
       align-items: center;
       div {
         flex-direction: row;
+        width: auto;
       }
+    }
+    button {
+      width: auto;
     }
   }
 `;
@@ -43,20 +52,23 @@ export const StyledTransactionForm = styled.form`
 export const StyledTransactionLabel = styled.label`
   font-size: 1.5rem;
   line-height: 1.2;
+  flex-grow: 1;
   ${({isSwitch, color}) => isSwitch ?
     css`background-color: white;
       color: ${color};
+      min-height: 3.4rem;
       border: 0.2rem solid ${color};
       border-radius: 0.3rem;
       padding: 0.5rem;
+      text-align: center;
       cursor: pointer;
     ` :
     css`display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 33%;
+    width: 33%;   
     @media (max-width: 500px) {
-      width: 80%;
+      width: 100%;
     }
   `}
 `;

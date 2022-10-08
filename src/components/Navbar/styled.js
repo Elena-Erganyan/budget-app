@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const StyledNavbar = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
-  padding: 1rem;
+  margin-bottom: 1rem;
 `;
 
 export const StyledLink = styled(Link)`

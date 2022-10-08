@@ -17,9 +17,13 @@ export const StyledTransactionItem = styled.div`
   div {
     display: flex;
     justify-content: space-between;
-    gap: 1rem;
+    align-items: center;
+    gap: 1.5rem;
     padding: 1.5rem;
     font-size: 1.5rem;
+  }
+  span:first-child {
+    min-width: 7.8rem;
   }
   @media (max-width: 500px) {
     flex-direction: column;

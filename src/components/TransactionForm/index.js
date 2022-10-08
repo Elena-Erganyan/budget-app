@@ -18,7 +18,12 @@ const TransactionForm = ({item, setItemsToEdit}) => {
   const [type, setType] = useState((item && item.type) || 'Income');
   const [category, setCategory] = useState((item && item.category) || 'Salary');
 
-  const { addTransaction, replaceTransaction, incomeCategories, expenseCategories } = useTransactionContext();
+  const {
+    addTransaction,
+    replaceTransaction,
+    incomeCategories,
+    expenseCategories
+  } = useTransactionContext();
 
   const categories = type === 'Income' ? incomeCategories : expenseCategories;
 
@@ -92,31 +97,31 @@ const TransactionForm = ({item, setItemsToEdit}) => {
         <div>
           <div>
             <StyledTransactionInput
-              id={item ? "income" + item.id : "income"}
+              id={item ? 'income' + item.id : 'income'}
               checked={type === 'Income'}
               color="#4C8D26"
-              name={item ? "type" + item.id : "type"}
-              onChange={() => typeHandler("Income")}
+              name={item ? 'type' + item.id : 'type'}
+              onChange={() => typeHandler('Income')}
               type="radio"
             />
             <StyledTransactionLabel
               color="#4C8D26"
-              htmlFor={item ? "income" + item.id : "income"}
+              htmlFor={item ? 'income' + item.id : 'income'}
               isSwitch
             >
               Income
             </StyledTransactionLabel>
             <StyledTransactionInput
-              id={item ? "expense" + item.id : "expense"}
+              id={item ? 'expense' + item.id : 'expense'}
               checked={type === 'Expense'}
               color="#882380"
-              name={item ? "type" + item.id : "type"}
-              onChange={() => typeHandler("Expense")}
+              name={item ? 'type' + item.id : 'type'}
+              onChange={() => typeHandler('Expense')}
               type="radio"
             />
             <StyledTransactionLabel
               color="#882380"
-              htmlFor={item ? "expense" + item.id : "expense"}
+              htmlFor={item ? 'expense' + item.id : 'expense'}
               isSwitch
             >
               Expense
@@ -124,7 +129,11 @@ const TransactionForm = ({item, setItemsToEdit}) => {
           </div>
           <StyledTransactionLabel>
             Category
-            <StyledTransactionInput as="select" value={category} onChange={(evt) => setCategory(evt.target.value)}>
+            <StyledTransactionInput
+              as="select"
+              value={category}
+              onChange={(evt) => setCategory(evt.target.value)}
+            >
               {categories.map((category, i) => <option key={i}>{category}</option>)}
             </StyledTransactionInput>
           </StyledTransactionLabel>

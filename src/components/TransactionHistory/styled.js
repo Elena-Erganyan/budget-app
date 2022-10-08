@@ -1,10 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledTransactionHistory = styled.div`
   display: flex;
   flex-direction: column;
   width: 90%;
-  max-width: 70rem; 
   margin-bottom: 1rem;
   color: #223C20;
   h2 {
