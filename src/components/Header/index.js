@@ -1,9 +1,13 @@
 import React from 'react';
-import { StyledHeader } from './styled';
+import Navbar from '../Navbar';
+import { StyledHeaderWrapper, StyledHeader } from './styled';
 
 const Header = () => {
   return (
-    <StyledHeader>Budget app</StyledHeader>
+    <StyledHeaderWrapper>
+      <StyledHeader>Budget app</StyledHeader>
+      <Navbar/>
+    </StyledHeaderWrapper>
   );
 };
 

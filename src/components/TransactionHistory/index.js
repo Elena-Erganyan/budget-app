@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTransactionContext } from '../../context/globalState';
-import TransactionItem from '../TransactionItem';
+import TransactionList from '../TransactionList';
 import { StyledTransactionHistory } from './styled';
 
 const TransactionHistory = () => {
@@ -9,14 +9,10 @@ const TransactionHistory = () => {
   return (
     <StyledTransactionHistory>
       <h2>History</h2>
-      {transactions.length > 0
-      ? <div>{transactions.map(item => 
-          <TransactionItem
-            item={item}
-            key={item.id}
-          />
-        )}</div>
-      : <div>Your transactions will be shown here</div>}
+      <TransactionList
+        text="Your transactions will be shown here"
+        transactions={transactions}
+      />
     </StyledTransactionHistory>
   );
 };

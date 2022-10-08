@@ -1,15 +1,11 @@
 import styled from 'styled-components';
+import { fadeIn } from '../../components/generalAnimations';
 
-export const StyledHeaderWrapper = styled.div`
+export const StyledHome = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   max-width: 90rem;
-`;
-
-export const StyledHeader = styled.h1`
-  padding: 1rem;
-  font-size: 3rem;
-  color: #DE60CA;
+  animation: 0.5s ${fadeIn} forwards;
 `;

@@ -6,26 +6,54 @@ const initialState = {
   transactions: [
     {
       id: 1,
-      date: '2022-09-10',
-      type: 'income',
-      title: 'Cash',
-      amount: 600,
+      date: new Date('2022-09-12').getTime(),
+      type: 'Expense',
+      category: 'Food',
+      title: 'Food',
+      amount: 150,
     },
     {
       id: 2,
-      date: '2022-09-12',
-      type: 'expense',
-      title: 'Food',
-      amount: 250,
-    },
-    {
-      id: 3,
-      date: '2022-09-15',
-      type: 'expense',
-      title: 'Transportation',
-      amount: 150,
+      date: new Date('2022-09-10').getTime(),
+      type: 'Income',
+      category: 'Salary',
+      title: 'Cash',
+      amount: 600,
     },
   ],
+  incomeCategories: [
+    'Salary',
+    'Part-time job',
+    'Gift',
+    'Other income',
+  ],
+  expenseCategories: [
+    'Food',
+    'Clothes',
+    'Transportation',
+    'Internet',
+    'Mobile service',
+    'Other expenses',
+  ],
+  categoryIcons: {
+    'Salary': 'Money',
+    'Part-time job': 'Coins',
+    'Gift': 'Gift',
+    'Other income': 'Wallet',
+    'Food': 'Hamburger',
+    'Clothes': 'TShirt',
+    'Transportation': 'Car',
+    'Internet': 'Globe',
+    'Mobile service': 'DeviceMobile',
+    'Other expenses': 'Receipt',
+  },
+  filters: {
+    type: 'Income',
+    category: 'All',
+    startDate: new Date().toISOString().split('T')[0],
+    endDate: new Date().toISOString().split('T')[0],
+    sortType: 'dateDesc',
+  },
 };
 
 export const GlobalContext = createContext(initialState);
@@ -54,12 +82,24 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
+  function saveFilters(filters) {
+    dispatch({
+      type: 'SAVE_FILTERS',
+      payload: filters,
+    });
+  }
+
   return (
     <GlobalContext.Provider value={{
       transactions: state.transactions,
+      incomeCategories: state.incomeCategories,
+      expenseCategories: state.expenseCategories,
+      categoryIcons: state.categoryIcons,
       deleteTransaction,
       addTransaction,
       replaceTransaction,
+      filters: state.filters,
+      saveFilters,
     }}>
       {children}
     </GlobalContext.Provider>

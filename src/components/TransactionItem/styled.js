@@ -6,8 +6,8 @@ export const StyledTransactionItem = styled.div`
   align-items: center;
   padding: 0.5rem;
   margin-bottom: 1rem;
-  border: 1px solid ${props => props.color};
-  border-left: 1rem solid ${props => props.color};
+  border: 1px solid ${({color}) => color};
+  border-left: 1rem solid ${({color}) => color};
   border-radius: 0.7rem;
   color: #223C20;
   h2 {
@@ -17,11 +17,26 @@ export const StyledTransactionItem = styled.div`
   div {
     display: flex;
     justify-content: space-between;
-    gap: 1rem;
+    align-items: center;
+    gap: 1.5rem;
     padding: 1.5rem;
     font-size: 1.5rem;
   }
+  span:first-child {
+    min-width: 7.8rem;
+  }
   @media (max-width: 500px) {
     flex-direction: column;
+  }
+`;
+
+export const StyledTransactionCategory = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+  span {
+    color: ${({color}) => color};
+    text-align: center;
   }
 `;

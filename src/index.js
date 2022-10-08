@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createGlobalStyle } from 'styled-components';
@@ -14,6 +15,7 @@ const GlobalStyles = createGlobalStyle`
   html {
     font-size: 62.5%;
     scroll-behavior: smooth;
+    background-color: seashell;
   }
 
   #root {
@@ -27,8 +29,10 @@ const GlobalStyles = createGlobalStyle`
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <GlobalStyles />
-    <App />
+    <BrowserRouter>
+      <GlobalStyles />
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );
 

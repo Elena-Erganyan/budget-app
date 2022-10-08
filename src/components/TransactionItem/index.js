@@ -1,30 +1,48 @@
-import React, { useState } from 'react';
+import * as Icons from 'phosphor-react';
+import React from 'react';
 import { useTransactionContext } from '../../context/globalState';
-import Button from '../Button';
-import TransactionForm from '../TransactionForm';
-import { StyledTransactionItem } from './styled';
+import { StyledTransactionItem, StyledTransactionCategory } from './styled';
 
-const TransactionItem = ({item}) => {
-  const { amount, type, date, title, id } = item;
-  const { deleteTransaction } = useTransactionContext();
-  const [readOnly, setReadOnly] = useState(true);
+const { Pencil, Trash } = Icons;
 
-  const sign = type === 'income' ? '+' : '-';
-  const color = type === 'income' ? '#4C8D26' : '#882380';
+const TransactionItem = ({item, setItemsToEdit}) => {
+  const { amount, type, category, date, title, id } = item;
+  const { deleteTransaction, categoryIcons } = useTransactionContext();
 
-  return readOnly ? (
+  const sign = type === 'Income' ? '+' : '-';
+  const color = type === 'Income' ? '#4C8D26' : '#882380';
+
+  const IconComponent = Icons[categoryIcons[category]];
+
+  return (
     <StyledTransactionItem color={color}>
+      <StyledTransactionCategory color={color}>
+        <IconComponent color={color} size={28} weight="duotone" />
+        <span>{category}</span>
+      </StyledTransactionCategory>
       <div>
-        <span>{date}</span><span>{title}</span><span>{sign}${amount}</span>
+        <span>{new Date(date).toISOString().split('T')[0]}</span>
+        <span>{title}</span>
+        <span style={{color: color}}>{sign}${amount}</span>
       </div>
       <div>
-        <Button color={color} onClick={() => setReadOnly(false)} primary>Edit</Button>
-        <Button color={color} onClick={() => deleteTransaction(id)}>Delete</Button>
+        <Pencil
+          color={color}
+          onClick={() => setItemsToEdit(prevIds => [...prevIds, id])}
+          size={28}
+          style={{cursor: 'pointer'}}
+          weight="duotone"
+        />
+        <Trash
+          color={color}
+          onClick={() => deleteTransaction(id)}
+          size={28}
+          style={{cursor: 'pointer'}}
+          weight="duotone"
+        />
       </div>
     </StyledTransactionItem>
-  ) : (
-    <TransactionForm item={item} setReadOnly={setReadOnly} />
-  )
+  );
 };
 
 export default TransactionItem;
