@@ -12,6 +12,13 @@ export const StyledManageTransactionsWrapper = styled.div`
   animation: 0.5s ${fadeIn} forwards;
 `;
 
+export const StyledGraphWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+`;
+
 export const StyledManageTransactions = styled.div`
   width: 90%;
   text-align: center;

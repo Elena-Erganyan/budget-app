@@ -8,7 +8,7 @@ const TransactionList = ({transactions, text}) => {
 
   return (
     <>
-      {transactions.length > 0
+      {transactions.length
       ? <StyledTransactionList>{transactions.map(item => {
         if (itemsToEdit.includes(item.id)) {
           return (
