@@ -12,14 +12,39 @@ export const StyledManageTransactionsWrapper = styled.div`
   animation: 0.5s ${fadeIn} forwards;
 `;
 
+export const StyledStatisticsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 90%;
+  gap: 2rem;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
 export const StyledGraphWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 100%;
+  order: 1;
+  max-width: 40rem;
+  width: 48%;
+  @media (max-width: 600px) {
+    order: 0;
+    width: 80%;
+  }
 `;
 
 export const StyledManageTransactions = styled.div`
-  width: 90%;
-  text-align: center;
+  width: 48%;
+  @media (max-width: 900px) {
+    & > div > div {
+      flex-direction: column;
+    }
+  }
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `;

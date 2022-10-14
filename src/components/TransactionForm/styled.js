@@ -34,7 +34,7 @@ export const StyledTransactionForm = styled.form`
     width: 33%;
     min-height: 3.4rem;
   }
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
     div {
       flex-direction: column;
       align-items: center;
@@ -67,7 +67,7 @@ export const StyledTransactionLabel = styled.label`
     flex-direction: column;
     align-items: flex-start;
     width: 33%;   
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
       width: 100%;
     }
   `}

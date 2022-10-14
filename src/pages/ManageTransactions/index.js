@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   StyledManageTransactionsWrapper,
+  StyledStatisticsWrapper,
   StyledGraphWrapper,
   StyledManageTransactions
 } from './styled';
@@ -17,18 +18,20 @@ const ManageTransactions = () => {
         filteredTransactions={filteredTransactions}
         setFilteredTransactions={setFilteredTransactions}
       />
-      <StyledGraphWrapper>
-        {filteredTransactions.length
-          ? <DoughnutChart filteredTransactions={filteredTransactions} />
-          : null
-        }
+      <StyledStatisticsWrapper>
+        <StyledGraphWrapper>
+          {filteredTransactions.length
+            ? <DoughnutChart filteredTransactions={filteredTransactions} />
+            : null
+          }
+        </StyledGraphWrapper>
         <StyledManageTransactions>
           <TransactionList
             text="No transactions with the selected parameters"
             transactions={filteredTransactions}
           />
         </StyledManageTransactions>
-      </StyledGraphWrapper>
+      </StyledStatisticsWrapper>
     </StyledManageTransactionsWrapper>
   );
 };
