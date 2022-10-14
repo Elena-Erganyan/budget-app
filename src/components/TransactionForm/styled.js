@@ -50,7 +50,7 @@ export const StyledTransactionForm = styled.form`
 `;
 
 export const StyledTransactionLabel = styled.label`
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   line-height: 1.2;
   flex-grow: 1;
   ${({isSwitch, color}) => isSwitch ?
@@ -76,7 +76,7 @@ export const StyledTransactionLabel = styled.label`
 export const StyledTransactionInput = styled.input`
   min-height: 3.4rem;
   width: 100%;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   line-height: 1.2;
   padding: 0.5rem;
   background-color: white;

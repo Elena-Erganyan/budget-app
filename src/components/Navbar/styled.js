@@ -6,6 +6,7 @@ export const StyledNavbar = styled.nav`
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
+  max-width: 90%;
   margin-bottom: 1rem;
 `;
 

@@ -7,7 +7,7 @@ export const StyledManageTransactionsWrapper = styled.div`
   align-items: center;
   width: 100%;
   max-width: 90rem;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   line-height: 1.2;
   animation: 0.5s ${fadeIn} forwards;
 `;
@@ -30,7 +30,7 @@ export const StyledGraphWrapper = styled.div`
   align-items: center;
   order: 1;
   max-width: 40rem;
-  width: 48%;
+  width: 45%;
   @media (max-width: 600px) {
     order: 0;
     width: 80%;
@@ -38,11 +38,9 @@ export const StyledGraphWrapper = styled.div`
 `;
 
 export const StyledManageTransactions = styled.div`
-  width: 48%;
-  @media (max-width: 900px) {
-    & > div > div {
-      flex-direction: column;
-    }
+  width: 49%;
+  & > div > div {
+    flex-direction: column;
   }
   @media (max-width: 600px) {
     width: 100%;

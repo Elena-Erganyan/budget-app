@@ -20,7 +20,7 @@ export const StyledBalance = styled.div`
     line-height: 1.5;
   }
   span {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     line-height: 1.2;
     font-weight: bold;
   }

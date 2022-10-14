@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledTransactionItem = styled.div`
   display: flex;
@@ -19,7 +19,8 @@ export const StyledTransactionItem = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.5rem;
+    padding: 0.5rem;
+    font-size: 1.7rem;
     line-height: 1.2;
   }
   @media (max-width: 600px) {
@@ -44,9 +45,7 @@ export const StyledTransactionCategory = styled.div`
 
 export const StyledTransactionInfo = styled.div`
   gap: 2rem;
-  span:first-child {
-    min-width: 7.8rem;
-  }
+  min-width: 65%;
 `;
 
 export const StyledTransactionButtons = styled.div`
