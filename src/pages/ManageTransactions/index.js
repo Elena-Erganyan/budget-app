@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
+import TransactionList from '../../components/TransactionList';
+import TransactionFilters from '../../components/TransactionFilters';
+import DoughnutChart from '../../components/DoughnutChart';
 import {
   StyledManageTransactionsWrapper,
   StyledStatisticsWrapper,
   StyledGraphWrapper,
   StyledManageTransactions
 } from './styled';
-import TransactionList from '../../components/TransactionList';
-import TransactionFilters from '../../components/TransactionFilters';
-import DoughnutChart from '../../components/DoughnutChart';
 
 const ManageTransactions = () => {
   const [filteredTransactions, setFilteredTransactions] = useState([]);
@@ -19,12 +19,11 @@ const ManageTransactions = () => {
         setFilteredTransactions={setFilteredTransactions}
       />
       <StyledStatisticsWrapper>
-        <StyledGraphWrapper>
-          {filteredTransactions.length
-            ? <DoughnutChart filteredTransactions={filteredTransactions} />
-            : null
-          }
-        </StyledGraphWrapper>
+        {filteredTransactions.length > 0 &&
+          <StyledGraphWrapper>
+            <DoughnutChart filteredTransactions={filteredTransactions} />
+          </StyledGraphWrapper>        
+        }
         <StyledManageTransactions>
           <TransactionList
             text="No transactions with the selected parameters"

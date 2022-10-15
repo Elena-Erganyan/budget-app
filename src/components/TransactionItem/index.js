@@ -15,7 +15,7 @@ const TransactionItem = ({item, setItemsToEdit}) => {
   const { deleteTransaction, categoryIcons } = useTransactionContext();
 
   const sign = type === 'Income' ? '+' : '-';
-  const color = type === 'Income' ? '#4C8D26' : '#882380';
+  const color = type === 'Income' ? 'var(--income-color)' : 'var(--expense-color)';
 
   const IconComponent = Icons[categoryIcons[category]];
 

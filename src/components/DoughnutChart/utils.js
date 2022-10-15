@@ -1,3 +1,14 @@
+export const gatherGraphData = (filteredTransactions, categories) => {
+  const categoryAmounts = [];
+  categories.forEach(category => {
+    const amount = filteredTransactions
+      .reduce((sum, item) => sum += (item.category === category ? item.amount : 0), 0);
+    amount && categoryAmounts.push({category, amount});
+  });
+  categoryAmounts.sort((a, b) => a.amount - b.amount);
+  return categoryAmounts;
+};
+
 export const drawCenterText = (chart) => {
   const {ctx, chartArea: {top, width, height}, options: {plugins: {centerText}}} = chart;
   ctx.save();

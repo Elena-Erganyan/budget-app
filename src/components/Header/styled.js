@@ -14,5 +14,5 @@ export const StyledHeader = styled.h1`
   font-size: 3.5rem;
   line-height: 1.5;
   text-transform: capitalize;
-  color: #DE60CA;
+  color: var(--expense-color);
 `;

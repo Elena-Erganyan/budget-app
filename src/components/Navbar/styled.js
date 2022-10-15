@@ -16,6 +16,6 @@ export const StyledLink = styled(Link)`
   line-height: 1.2;
   text-decoration: none;
   text-align: center;
-  color: ${({status}) => status === 'active' ? '#882380' : '#DE60CA'};
+  color: ${({status}) => status === 'active' ? 'var(--expense-color)' : 'var(--accent-color-2)'};
   cursor: ${({status}) => status === 'active' ? 'auto' : 'pointer'};
 `;

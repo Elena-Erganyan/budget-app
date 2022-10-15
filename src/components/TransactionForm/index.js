@@ -67,7 +67,7 @@ const TransactionForm = ({item, setItemsToEdit}) => {
               pattern="\d{4}-\d{2}-\d{2}"
               required
               type="date"
-              value={new Date(date).toISOString().split('T')[0]}
+              value={!isNaN(date) ? new Date(date).toISOString().split('T')[0] : ''}
             />
           </StyledTransactionLabel>
           <StyledTransactionLabel>
@@ -96,13 +96,13 @@ const TransactionForm = ({item, setItemsToEdit}) => {
             <StyledTransactionInput
               id={item ? 'income' + item.id : 'income'}
               checked={type === 'Income'}
-              color="#4C8D26"
+              color="var(--income-color)"
               name={item ? 'type' + item.id : 'type'}
               onChange={() => typeHandler('Income')}
               type="radio"
             />
             <StyledTransactionLabel
-              color="#4C8D26"
+              color="var(--income-color)"
               htmlFor={item ? 'income' + item.id : 'income'}
               isSwitch
             >
@@ -111,13 +111,13 @@ const TransactionForm = ({item, setItemsToEdit}) => {
             <StyledTransactionInput
               id={item ? 'expense' + item.id : 'expense'}
               checked={type === 'Expense'}
-              color="#882380"
+              color="var(--expense-color)"
               name={item ? 'type' + item.id : 'type'}
               onChange={() => typeHandler('Expense')}
               type="radio"
             />
             <StyledTransactionLabel
-              color="#882380"
+              color="var(--expense-color)"
               htmlFor={item ? 'expense' + item.id : 'expense'}
               isSwitch
             >
@@ -137,15 +137,15 @@ const TransactionForm = ({item, setItemsToEdit}) => {
         {item ?
           <div>
             <Button
-              color="#DE60CA"
+              color="var(--accent-color-2)"
               onClick={() => setItemsToEdit(prevState => prevState.filter((oldId) => oldId !== item.id))}
               type="button"
             >
               Cancel
             </Button>
-            <Button color="#DE60CA" primary>Save changes</Button>
+            <Button color="var(--accent-color-2)" primary>Save changes</Button>
           </div>
-          : <Button color="#DE60CA" primary>Add transaction</Button>}
+          : <Button color="var(--accent-color-2)" primary>Add transaction</Button>}
         </div>
       </StyledTransactionForm>
     </StyledTransactionWrapper>

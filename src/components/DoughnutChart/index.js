@@ -2,7 +2,7 @@ import React from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { useTransactionContext } from '../../context/globalState';
-import { drawCenterText } from './utils';
+import { drawCenterText, gatherGraphData } from './utils';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -13,28 +13,25 @@ const DoughnutChart = ({ filteredTransactions }) => {
     filters,
   } = useTransactionContext();
 
-  const incomeColors = ['#00955B', '#007865','#D5FB00', '#00B14C', '#00CC3A','#85E521'];
+  const incomeColors = ['#D5FB00', '#85E521', '#00CC3A', '#00B14C', '#00955B', '#007865'];
+  const expenseColors = ['#FFB4FF', '#F98FEC', '#D36CC7', '#AD48A3', '#882380', '#5F195A'];
 
-  const expenseColors = ['#AD48A3', '#882380', '#5f195a', '#FFB4FF',  '#F98FEC', '#D36CC7'];
-
-  let categories = filters.category === 'All'
+  const categories = filters.category === 'All'
     ? (filters.type === 'Income' ? incomeCategories : expenseCategories)
     : [filters.category];
-  const colors = filters.type === 'Income' ? incomeColors : expenseColors;
 
-  const categoryAmounts = {};
+  let colors = filters.type === 'Income' ? incomeColors : expenseColors;
+  if (filters.category !== 'All') {
+    colors = [colors[3]];
+  }
+
   const total = filteredTransactions.reduce((sum, item) => sum += item.amount, 0).toFixed(2);
-
-  categories.forEach(category => {
-    const amount = filteredTransactions
-      .reduce((sum, item) => sum += (item.category === category ? item.amount : 0), 0);
-    amount && (categoryAmounts[category] = amount);
-  });
+  const categoryAmounts = gatherGraphData(filteredTransactions, categories);
 
   const data = {
-    labels: Object.keys(categoryAmounts),
+    labels: categoryAmounts.map((item) => item.category),
     datasets: [{
-      data: Object.values(categoryAmounts),
+      data: categoryAmounts.map((item) => item.amount),
       backgroundColor: colors,
       hoverBackgroundColor: colors,
       cutout: '55%',

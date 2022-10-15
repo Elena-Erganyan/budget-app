@@ -33,9 +33,16 @@ const GlobalStyles = createGlobalStyle`
   }
 
   html {
+    --income-color: #4C8D26;
+    --accent-color-1: #D5FB00;
+    --expense-color: #882380;
+    --accent-color-2: #DE60CA;
+    --dark-color: #000000;
+    --background-color: seashell;
+
     font-size: 62.5%;
     scroll-behavior: smooth;
-    background-color: seashell;
+    background-color: var(--background-color);    
   }
 
   #root {

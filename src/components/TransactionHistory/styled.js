@@ -5,7 +5,7 @@ export const StyledTransactionHistory = styled.div`
   flex-direction: column;
   width: 90%;
   margin-bottom: 1rem;
-  color: #223C20;
+  color: var(--dark-color);
   h2 {
     margin-bottom: 1rem;
     font-size: 2rem;

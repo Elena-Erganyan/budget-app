@@ -12,8 +12,8 @@ export const StyledBalance = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 0.5rem;
-  background-color: #D5FB00;
-  color: #223C20;
+  background-color: var(--accent-color-1);
+  color: var(--dark-color);
   border-radius: 0.7rem 0.7rem 0 0;
   h3 {
     font-size: 2rem;
@@ -29,23 +29,23 @@ export const StyledBalance = styled.div`
 export const StyledIncomeExpenses = styled.div`
   display: flex;
   justify-content: space-between;
-  color: #223C20;
+  color: var(--dark-color);
   border-radius: 0 0 0.7rem 0.7rem;
 `;
 
 export const StyledIncome = styled(StyledBalance)`
   width: 50%;
-  border: 1px solid #D5FB00;
+  border: 1px solid var(--accent-color-1);
   border-radius: 0 0 0 0.7rem;
   background-color: transparent;
   span {
-    color: #4C8D26;
+    color: var(--income-color);
   }
 `;
 
 export const StyledExpenses = styled(StyledIncome)`
   border-radius: 0 0 0.7rem 0;
   span {
-    color: #882380;
+    color: var(--expense-color);
   }
 `;

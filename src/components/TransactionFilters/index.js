@@ -39,13 +39,13 @@ const TransactionFilters = ({filteredTransactions, setFilteredTransactions}) => 
           <StyledTransactionInput
             id="incomeFilter"
             checked={type === 'Income'}
-            color="#4C8D26"
+            color="var(--income-color)"
             name="transactionType"
             onChange={() => typeHandler('Income')}
             type="radio"
           />
           <StyledTransactionLabel
-            color="#4C8D26"
+            color="var(--income-color)"
             htmlFor="incomeFilter"
             isSwitch
           >
@@ -54,13 +54,13 @@ const TransactionFilters = ({filteredTransactions, setFilteredTransactions}) => 
           <StyledTransactionInput
             id="expenseFilter"
             checked={type === 'Expense'}
-            color="#882380"
+            color="var(--expense-color)"
             name="transactionType"
             onChange={() => typeHandler('Expense')}
             type="radio"
           />
           <StyledTransactionLabel
-            color="#882380"
+            color="var(--expense-color)"
             htmlFor="expenseFilter"
             isSwitch
           >

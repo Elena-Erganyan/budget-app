@@ -5,7 +5,7 @@ export const StyledButton = styled.button`
   font-size: 1.7rem; 
   background-color: ${({primary, color}) => primary ? color : 'white'};
   color: ${({primary, color})  => primary ? 'white' : color};
-  border: 1px solid ${({color}) => color};
+  border: 2px solid ${({color}) => color};
   border-radius: 0.3rem;
   cursor: pointer;
 `;

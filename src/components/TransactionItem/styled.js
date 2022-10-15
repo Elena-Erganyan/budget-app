@@ -10,7 +10,7 @@ export const StyledTransactionItem = styled.div`
   border: 1px solid ${({color}) => color};
   border-left: 1rem solid ${({color}) => color};
   border-radius: 0.7rem;
-  color: #223C20;
+  color: var(--dark-color);
   h2 {
     font-size: 2.5rem;
     line-height: 1.5;
