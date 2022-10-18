@@ -9,6 +9,7 @@ import {
   StyledTransactionInput,
 } from './styled';
 import Button from '../Button';
+import { useTheme } from 'styled-components';
 
 const TransactionForm = ({item, setItemsToEdit}) => {
   
@@ -24,6 +25,8 @@ const TransactionForm = ({item, setItemsToEdit}) => {
     incomeCategories,
     expenseCategories
   } = useTransactionContext();
+
+  const theme = useTheme();
 
   const categories = type === 'Income' ? incomeCategories : expenseCategories;
 
@@ -96,13 +99,13 @@ const TransactionForm = ({item, setItemsToEdit}) => {
             <StyledTransactionInput
               id={item ? 'income' + item.id : 'income'}
               checked={type === 'Income'}
-              color="var(--income-color)"
+              color={theme.incomeColor}
               name={item ? 'type' + item.id : 'type'}
               onChange={() => typeHandler('Income')}
               type="radio"
             />
             <StyledTransactionLabel
-              color="var(--income-color)"
+              color={theme.incomeColor}
               htmlFor={item ? 'income' + item.id : 'income'}
               isSwitch
             >
@@ -111,13 +114,13 @@ const TransactionForm = ({item, setItemsToEdit}) => {
             <StyledTransactionInput
               id={item ? 'expense' + item.id : 'expense'}
               checked={type === 'Expense'}
-              color="var(--expense-color)"
+              color={theme.expenseColor}
               name={item ? 'type' + item.id : 'type'}
               onChange={() => typeHandler('Expense')}
               type="radio"
             />
             <StyledTransactionLabel
-              color="var(--expense-color)"
+              color={theme.expenseColor}
               htmlFor={item ? 'expense' + item.id : 'expense'}
               isSwitch
             >
@@ -137,15 +140,15 @@ const TransactionForm = ({item, setItemsToEdit}) => {
         {item ?
           <div>
             <Button
-              color="var(--accent-color-2)"
+              color={theme.expenseAccentColor}
               onClick={() => setItemsToEdit(prevState => prevState.filter((oldId) => oldId !== item.id))}
               type="button"
             >
               Cancel
             </Button>
-            <Button color="var(--accent-color-2)" primary>Save changes</Button>
+            <Button color={theme.expenseAccentColor} primary>Save changes</Button>
           </div>
-          : <Button color="var(--accent-color-2)" primary>Add transaction</Button>}
+          : <Button color={theme.expenseAccentColor} primary>Add transaction</Button>}
         </div>
       </StyledTransactionForm>
     </StyledTransactionWrapper>

@@ -13,7 +13,8 @@ export const drawCenterText = (chart) => {
   const {ctx, chartArea: {top, width, height}, options: {plugins: {centerText}}} = chart;
   ctx.save();
   const fontSize = (height / 180).toFixed(2);
-  ctx.font = fontSize + "em sans-serif";
+  ctx.font = fontSize + "em " + centerText.fontFamily;
+  ctx.fillStyle = centerText.textColor;
   ctx.textBaseline = "middle";
  
   const text = centerText.text;

@@ -30,19 +30,14 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     font-family: 'Rosa Sans Regular', sans-serif;
+    color: ${({theme}) => theme.textColor};
   }
 
   html {
-    --income-color: #4C8D26;
-    --accent-color-1: #D5FB00;
-    --expense-color: #882380;
-    --accent-color-2: #DE60CA;
-    --dark-color: #000000;
-    --background-color: seashell;
-
     font-size: 62.5%;
     scroll-behavior: smooth;
-    background-color: var(--background-color);    
+    background-color: ${({theme}) => theme.backgroundColor};
+    transition: background 0.5s;
   }
 
   #root {

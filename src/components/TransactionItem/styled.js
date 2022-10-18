@@ -7,10 +7,11 @@ export const StyledTransactionItem = styled.div`
   gap: 1.5rem;
   padding: 1.5rem;
   margin-bottom: 1rem;
-  border: 1px solid ${({color}) => color};
   border-left: 1rem solid ${({color}) => color};
   border-radius: 0.7rem;
-  color: var(--dark-color);
+  background-color: ${({theme}) => theme.backgroundAccentColor};
+  box-shadow: ${({theme}) => theme.backgroundAccentColor === '#ffffff' ? '0 0 2px 1px #cccccc' : 'none'};
+  color: ${({theme}) => theme.textColor};
   h2 {
     font-size: 2.5rem;
     line-height: 1.5;
@@ -46,6 +47,9 @@ export const StyledTransactionCategory = styled.div`
 export const StyledTransactionInfo = styled.div`
   gap: 2rem;
   min-width: 65%;
+  span:last-child {
+    color: ${({color}) => color};
+  }
 `;
 
 export const StyledTransactionButtons = styled.div`

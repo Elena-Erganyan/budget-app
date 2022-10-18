@@ -17,7 +17,8 @@ export const StyledStatisticsWrapper = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   width: 90%;
-  gap: 2rem;
+  row-gap: 2rem;
+  column-gap: 6%;
   @media (max-width: 600px) {
     flex-direction: column;
     align-items: center;
@@ -38,7 +39,7 @@ export const StyledGraphWrapper = styled.div`
 `;
 
 export const StyledManageTransactions = styled.div`
-  width: 49%;
+  flex-grow: 1;
   & > div > div {
     flex-direction: column;
   }

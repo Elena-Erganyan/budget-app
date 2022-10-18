@@ -5,6 +5,8 @@ export const StyledBalanceWrapper = styled.div`
   flex-direction: column;
   width: 90%;
   margin-bottom: 1.5rem;
+  border-radius: 0.7rem;
+  box-shadow: ${({theme}) => theme.backgroundAccentColor === '#ffffff' ? '0 0 2px 1px #cccccc' : 'none'};
 `;
 
 export const StyledBalance = styled.div`
@@ -12,8 +14,8 @@ export const StyledBalance = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 0.5rem;
-  background-color: var(--accent-color-1);
-  color: var(--dark-color);
+  background-color: ${({theme}) => theme.incomeAccentColor};
+  color: ${({theme}) => theme.textColor};
   border-radius: 0.7rem 0.7rem 0 0;
   h3 {
     font-size: 2rem;
@@ -23,29 +25,33 @@ export const StyledBalance = styled.div`
     font-size: 1.7rem;
     line-height: 1.2;
     font-weight: bold;
+    color: ${({theme}) => theme.backgroundAccentColor};
   }
 `;
 
 export const StyledIncomeExpenses = styled.div`
   display: flex;
   justify-content: space-between;
-  color: var(--dark-color);
+  color: ${({theme}) => theme.textColor};
   border-radius: 0 0 0.7rem 0.7rem;
 `;
 
 export const StyledIncome = styled(StyledBalance)`
   width: 50%;
-  border: 1px solid var(--accent-color-1);
   border-radius: 0 0 0 0.7rem;
-  background-color: transparent;
+  background-color: ${({theme}) => theme.backgroundAccentColor};
   span {
-    color: var(--income-color);
+    color: ${({theme}) => theme.incomeColor};
   }
+  border: 3px solid ${({theme}) => theme.backgroundColor};
+  border-left: none;
+  border-bottom: none;
 `;
 
 export const StyledExpenses = styled(StyledIncome)`
   border-radius: 0 0 0.7rem 0;
   span {
-    color: var(--expense-color);
+    color: ${({theme}) => theme.expenseColor};
   }
+  border-right: none;
 `;

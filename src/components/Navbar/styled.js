@@ -6,7 +6,6 @@ export const StyledNavbar = styled.nav`
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
-  max-width: 90%;
   margin-bottom: 1rem;
 `;
 
@@ -16,6 +15,6 @@ export const StyledLink = styled(Link)`
   line-height: 1.2;
   text-decoration: none;
   text-align: center;
-  color: ${({status}) => status === 'active' ? 'var(--expense-color)' : 'var(--accent-color-2)'};
+  color: ${({status, theme}) => status === 'active' ? theme.expenseColor : theme.expenseAccentColor};
   cursor: ${({status}) => status === 'active' ? 'auto' : 'pointer'};
 `;

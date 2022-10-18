@@ -4,8 +4,8 @@ export const StyledTransactionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: ${({item}) => item ? '100%' : '90%'};
-  margin-bottom: 1rem;
-  color: var(--dark-color);
+  margin-bottom: 2rem;
+  color: ${({theme}) => theme.textColor};
 `;
   
 export const StyledTransactionHeader = styled.h2`
@@ -27,6 +27,9 @@ export const StyledTransactionForm = styled.form`
     div {
       position: relative;
       width: 33%;
+      button {
+        width: auto;
+      }
     }
   }
   button {
@@ -52,8 +55,8 @@ export const StyledTransactionLabel = styled.label`
   font-size: 1.7rem;
   line-height: 1.2;
   flex-grow: 1;
-  ${({isSwitch, color}) => isSwitch ?
-    css`background-color: white;
+  ${({isSwitch, color, theme}) => isSwitch ?
+    css`background-color: ${theme.backgroundColor};
       color: ${color};
       min-height: 3.4rem;
       border: 0.2rem solid ${color};
@@ -78,10 +81,11 @@ export const StyledTransactionInput = styled.input`
   font-size: 1.7rem;
   line-height: 1.2;
   padding: 0.5rem;
-  background-color: white;
-  color: var(--dark-color);
-  border: 1px solid var(--dark-color);
+  background-color: ${({theme}) => theme.backgroundAccentColor}; 
+  color: ${({theme}) => theme.textColor};
+  border: none;
   border-radius: 0.3rem;
+  box-shadow: ${({theme}) => theme.backgroundAccentColor === '#ffffff' ? '0 0 2px 1px #cccccc' : 'none'};
 
   &[type='radio'] {
     position: absolute;
@@ -94,10 +98,10 @@ export const StyledTransactionInput = styled.input`
     }
   }
   &[type="radio"]:focus-visible + label {
-    outline: 2px solid var(--dark-color);
+    outline: 2px solid ${({theme}) => theme.textColor};
   }
   &[type='radio']:checked + label {
     background-color: ${({color}) => color};
-    color: white;
+    color: ${({theme}) => theme.backgroundAccentColor};
   }
 `;

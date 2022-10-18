@@ -3,6 +3,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { useTransactionContext } from '../../context/globalState';
 import { drawCenterText, gatherGraphData } from './utils';
+import { useTheme } from 'styled-components';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -13,14 +14,13 @@ const DoughnutChart = ({ filteredTransactions }) => {
     filters,
   } = useTransactionContext();
 
-  const incomeColors = ['#D5FB00', '#85E521', '#00CC3A', '#00B14C', '#00955B', '#007865'];
-  const expenseColors = ['#FFB4FF', '#F98FEC', '#D36CC7', '#AD48A3', '#882380', '#5F195A'];
+  const theme = useTheme();
 
   const categories = filters.category === 'All'
     ? (filters.type === 'Income' ? incomeCategories : expenseCategories)
     : [filters.category];
 
-  let colors = filters.type === 'Income' ? incomeColors : expenseColors;
+  let colors = filters.type === 'Income' ? theme.incomeColors : theme.expenseColors;
   if (filters.category !== 'All') {
     colors = [colors[3]];
   }
@@ -34,6 +34,8 @@ const DoughnutChart = ({ filteredTransactions }) => {
       data: categoryAmounts.map((item) => item.amount),
       backgroundColor: colors,
       hoverBackgroundColor: colors,
+      borderColor: theme.backgroundColor,
+      hoverBorderColor: theme.backgroundColor,
       cutout: '55%',
     }],
   };
@@ -46,6 +48,8 @@ const DoughnutChart = ({ filteredTransactions }) => {
       centerText: {
         display: true,
         text: '$' + total,
+        fontFamily: 'Rosa Sans Regular, sans-serif',
+        textColor: theme.textColor,
       },
     },
   };
