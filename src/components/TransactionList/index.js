@@ -6,8 +6,6 @@ import { StyledTransactionList, StyledTransactionListText } from './styled';
 const TransactionList = ({transactions, text}) => {
   const [itemsToEdit, setItemsToEdit] = useState([]);
 
-  console.log(transactions);
-
   return (
     <>
       {transactions.length > 0
