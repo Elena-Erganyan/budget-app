@@ -6,6 +6,6 @@ export const StyledTransactionList = styled.div`
 `;
 
 export const StyledTransactionListText = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   line-height: 1.2;
 `;

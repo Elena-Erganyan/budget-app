@@ -9,7 +9,7 @@ const initialState = {
       date: new Date('2022-09-12').getTime(),
       type: 'Expense',
       category: 'Food',
-      title: 'Food',
+      title: 'Meat and vegetables',
       amount: 150,
     },
     {

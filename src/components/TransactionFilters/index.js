@@ -3,6 +3,7 @@ import { useTransactionContext } from '../../context/globalState';
 import { filterTransactions } from './utils';
 import { StyledTransactionLabel, StyledTransactionInput } from '../TransactionForm/styled';
 import { StyledManageTransactionsForm } from './styled';
+import { useTheme } from 'styled-components';
 
 const TransactionFilters = ({filteredTransactions, setFilteredTransactions}) => {
   const {
@@ -12,6 +13,8 @@ const TransactionFilters = ({filteredTransactions, setFilteredTransactions}) => 
     filters,
     saveFilters,
   } = useTransactionContext();
+
+  const theme = useTheme();
   
   const [type, setType] = useState(filters.type);
   const [category, setCategory] = useState(filters.category);
@@ -39,13 +42,13 @@ const TransactionFilters = ({filteredTransactions, setFilteredTransactions}) => 
           <StyledTransactionInput
             id="incomeFilter"
             checked={type === 'Income'}
-            color="#4C8D26"
+            color={theme.incomeColor}
             name="transactionType"
             onChange={() => typeHandler('Income')}
             type="radio"
           />
           <StyledTransactionLabel
-            color="#4C8D26"
+            color={theme.incomeColor}
             htmlFor="incomeFilter"
             isSwitch
           >
@@ -54,13 +57,13 @@ const TransactionFilters = ({filteredTransactions, setFilteredTransactions}) => 
           <StyledTransactionInput
             id="expenseFilter"
             checked={type === 'Expense'}
-            color="#882380"
+            color={theme.expenseColor}
             name="transactionType"
             onChange={() => typeHandler('Expense')}
             type="radio"
           />
           <StyledTransactionLabel
-            color="#882380"
+            color={theme.expenseColor}
             htmlFor="expenseFilter"
             isSwitch
           >

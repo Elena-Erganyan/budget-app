@@ -1,16 +1,23 @@
 import * as Icons from 'phosphor-react';
 import React from 'react';
+import { useTheme } from 'styled-components';
 import { useTransactionContext } from '../../context/globalState';
-import { StyledTransactionItem, StyledTransactionCategory } from './styled';
+import {
+  StyledTransactionItem,
+  StyledTransactionCategory,
+  StyledTransactionInfo,
+  StyledTransactionButtons,
+} from './styled';
 
 const { Pencil, Trash } = Icons;
 
 const TransactionItem = ({item, setItemsToEdit}) => {
   const { amount, type, category, date, title, id } = item;
   const { deleteTransaction, categoryIcons } = useTransactionContext();
+  const theme = useTheme();
 
   const sign = type === 'Income' ? '+' : '-';
-  const color = type === 'Income' ? '#4C8D26' : '#882380';
+  const color = type === 'Income' ? theme.incomeColor : theme.expenseColor;
 
   const IconComponent = Icons[categoryIcons[category]];
 
@@ -20,12 +27,12 @@ const TransactionItem = ({item, setItemsToEdit}) => {
         <IconComponent color={color} size={28} weight="duotone" />
         <span>{category}</span>
       </StyledTransactionCategory>
-      <div>
+      <StyledTransactionInfo color={color}>
         <span>{new Date(date).toISOString().split('T')[0]}</span>
         <span>{title}</span>
-        <span style={{color: color}}>{sign}${amount}</span>
-      </div>
-      <div>
+        <span>{sign}${amount}</span>
+      </StyledTransactionInfo>
+      <StyledTransactionButtons>
         <Pencil
           color={color}
           onClick={() => setItemsToEdit(prevIds => [...prevIds, id])}
@@ -40,7 +47,7 @@ const TransactionItem = ({item, setItemsToEdit}) => {
           style={{cursor: 'pointer'}}
           weight="duotone"
         />
-      </div>
+      </StyledTransactionButtons>
     </StyledTransactionItem>
   );
 };
