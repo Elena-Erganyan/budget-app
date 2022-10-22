@@ -1,12 +1,17 @@
 {
   "files": {
-    "main.js": "/budget-app/static/js/main.6a04c3fa.js",
+    "main.js": "/budget-app/static/js/main.a42984af.js",
     "static/js/787.c4271f98.chunk.js": "/budget-app/static/js/787.c4271f98.chunk.js",
+    "static/media/rosa-sans-regular.ttf": "/budget-app/static/media/rosa-sans-regular.c68c2ca20db6c4da8e1b.ttf",
+    "static/media/rosa-sans-regular.woff": "/budget-app/static/media/rosa-sans-regular.e995226214bb169c5e05.woff",
+    "static/media/rosa-sans-bold.woff": "/budget-app/static/media/rosa-sans-bold.5a9ce4de728f63f556b3.woff",
+    "static/media/rosa-sans-regular.woff2": "/budget-app/static/media/rosa-sans-regular.c71a1a748cf6e923bb98.woff2",
+    "static/media/rosa-sans-bold.woff2": "/budget-app/static/media/rosa-sans-bold.da049518259fb9e016cd.woff2",
     "index.html": "/budget-app/index.html",
-    "main.6a04c3fa.js.map": "/budget-app/static/js/main.6a04c3fa.js.map",
+    "main.a42984af.js.map": "/budget-app/static/js/main.a42984af.js.map",
     "787.c4271f98.chunk.js.map": "/budget-app/static/js/787.c4271f98.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.6a04c3fa.js"
+    "static/js/main.a42984af.js"
   ]
 }
