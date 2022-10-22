@@ -8,7 +8,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter basename={'/budget-app'}>
-      <GlobalStyles />
       <App />
     </BrowserRouter>
   </React.StrictMode>
