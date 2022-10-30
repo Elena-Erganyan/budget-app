@@ -2,25 +2,7 @@ import React, { createContext, useContext, useReducer } from 'react';
 import reducer from './reducer';
 
 const initialState = {
-  // for demonstration purposes
-  transactions: [
-    {
-      id: 1,
-      date: new Date('2022-09-12').getTime(),
-      type: 'Expense',
-      category: 'Food',
-      title: 'Meat and vegetables',
-      amount: 150,
-    },
-    {
-      id: 2,
-      date: new Date('2022-09-10').getTime(),
-      type: 'Income',
-      category: 'Salary',
-      title: 'Cash',
-      amount: 600,
-    },
-  ],
+  transactions: [],
   incomeCategories: [
     'Salary',
     'Part-time job',
@@ -61,6 +43,13 @@ export const GlobalContext = createContext(initialState);
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  function setTransactions(items) {
+    dispatch({
+      type: 'SET_TRANSACTIONS',
+      payload: items,
+    });
+  }
+
   function deleteTransaction(id) {
     dispatch({
       type: 'DELETE_TRANSACTION',
@@ -95,6 +84,7 @@ export const GlobalProvider = ({ children }) => {
       incomeCategories: state.incomeCategories,
       expenseCategories: state.expenseCategories,
       categoryIcons: state.categoryIcons,
+      setTransactions,
       deleteTransaction,
       addTransaction,
       replaceTransaction,

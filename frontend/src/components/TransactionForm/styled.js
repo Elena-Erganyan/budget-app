@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { StyledTransactionListText } from "../TransactionList/styled";
 
 export const StyledTransactionWrapper = styled.div`
   display: flex;
@@ -83,7 +84,7 @@ export const StyledTransactionInput = styled.input`
   padding: 0.5rem;
   background-color: ${({theme}) => theme.backgroundAccentColor}; 
   color: ${({theme}) => theme.textColor};
-  border: none;
+  border: ${({theme, error}) => error ? `2px solid ${theme.errorColor}` : 'none'};
   border-radius: 0.3rem;
   box-shadow: ${({theme}) => theme.backgroundAccentColor === '#ffffff' ? '0 0 2px 1px #cccccc' : 'none'};
 
@@ -104,4 +105,8 @@ export const StyledTransactionInput = styled.input`
     background-color: ${({color}) => color};
     color: ${({theme}) => theme.backgroundAccentColor};
   }
+`;
+
+export const StyledTransactionError = styled(StyledTransactionListText)`
+  color: ${({theme}) => theme.errorColor};
 `;
