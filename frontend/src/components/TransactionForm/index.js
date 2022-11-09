@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { useTransactionContext } from '../../context/globalState';
 import {
   StyledTransactionWrapper,
@@ -7,17 +6,20 @@ import {
   StyledTransactionForm,
   StyledTransactionLabel,
   StyledTransactionInput,
+  StyledTransactionError,
 } from './styled';
 import Button from '../Button';
 import { useTheme } from 'styled-components';
 
 const TransactionForm = ({item, setItemsToEdit}) => {
   
-  const [date, setDate] = useState((item && item.date) || Date.now());
+  const [date, setDate] = useState((item && item.date) || new Date().toISOString().split('T')[0]);
   const [title, setTitle] = useState((item && item.title) || '');
   const [amount, setAmount] = useState((item && item.amount) || '');
   const [type, setType] = useState((item && item.type) || 'Income');
   const [category, setCategory] = useState((item && item.category) || 'Salary');
+  const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState([]);
 
   const {
     addTransaction,
@@ -35,10 +37,10 @@ const TransactionForm = ({item, setItemsToEdit}) => {
     setCategory(type === 'Income' ? 'Salary' : 'Food');
   };
 
-  const onSubmit = (evt) => {
+  const onSubmit = async (evt) => {
     evt.preventDefault();
+    
     const transaction = {
-      id: item ? item.id : uuidv4(),
       date,
       type,
       category,
@@ -46,14 +48,48 @@ const TransactionForm = ({item, setItemsToEdit}) => {
       amount,
     };
 
+    // update a transaction
     if (item) {
-      replaceTransaction(item.id, transaction);
-      setItemsToEdit(prevState => prevState.filter((oldId) => oldId !== item.id))
+      const response = await fetch('/api/transactions/' + item._id, {
+        method: 'PATCH',
+        body: JSON.stringify(transaction),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const json = await response.json();
+
+      if (response.ok) {
+        replaceTransaction(item._id, transaction);
+        setItemsToEdit(prevState => prevState.filter((oldId) => oldId !== item._id));
+      } else {
+        setError(json.error);
+        setEmptyFields(json.emptyFields);
+      }
     } else {
-      addTransaction(transaction);
-      setTitle('');
-      setAmount('');
-    } 
+      // create a new transaction
+      const response = await fetch('/api/transactions/', {
+        method: 'POST',
+        body: JSON.stringify(transaction),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const json = await response.json();
+
+      if (response.ok) {
+        addTransaction(transaction);
+        setEmptyFields([]);
+        setError(null);
+        setTitle('');
+        setAmount('');
+      } else {
+        setError(json.error);
+        setEmptyFields(json.emptyFields);
+      }
+    }
   };
 
   return (
@@ -66,16 +102,18 @@ const TransactionForm = ({item, setItemsToEdit}) => {
           <StyledTransactionLabel>
             Date
             <StyledTransactionInput
-              onChange={(evt) => setDate(evt.target.valueAsNumber)}
+              error={emptyFields.includes('date')}
+              onChange={(evt) => setDate(evt.target.value)}
               pattern="\d{4}-\d{2}-\d{2}"
               required
               type="date"
-              value={!isNaN(date) ? new Date(date).toISOString().split('T')[0] : ''}
+              value={date.split('T')[0]}
             />
           </StyledTransactionLabel>
           <StyledTransactionLabel>
             Title
             <StyledTransactionInput
+              error={emptyFields.includes('title')}
               onChange={(evt) => setTitle(evt.target.value)}
               required
               type="text"
@@ -85,6 +123,7 @@ const TransactionForm = ({item, setItemsToEdit}) => {
           <StyledTransactionLabel>
             Amount
             <StyledTransactionInput
+              error={emptyFields.includes('amount')}
               min={0.01}
               step={0.01}
               onChange={(evt) => setAmount(+evt.target.value)}
@@ -97,31 +136,31 @@ const TransactionForm = ({item, setItemsToEdit}) => {
         <div>
           <div>
             <StyledTransactionInput
-              id={item ? 'income' + item.id : 'income'}
+              id={item ? 'income' + item._id : 'income'}
               checked={type === 'Income'}
               color={theme.incomeColor}
-              name={item ? 'type' + item.id : 'type'}
+              name={item ? 'type' + item._id : 'type'}
               onChange={() => typeHandler('Income')}
               type="radio"
             />
             <StyledTransactionLabel
               color={theme.incomeColor}
-              htmlFor={item ? 'income' + item.id : 'income'}
+              htmlFor={item ? 'income' + item._id : 'income'}
               isSwitch
             >
               Income
             </StyledTransactionLabel>
             <StyledTransactionInput
-              id={item ? 'expense' + item.id : 'expense'}
+              id={item ? 'expense' + item._id : 'expense'}
               checked={type === 'Expense'}
               color={theme.expenseColor}
-              name={item ? 'type' + item.id : 'type'}
+              name={item ? 'type' + item._id : 'type'}
               onChange={() => typeHandler('Expense')}
               type="radio"
             />
             <StyledTransactionLabel
               color={theme.expenseColor}
-              htmlFor={item ? 'expense' + item.id : 'expense'}
+              htmlFor={item ? 'expense' + item._id : 'expense'}
               isSwitch
             >
               Expense
@@ -141,7 +180,7 @@ const TransactionForm = ({item, setItemsToEdit}) => {
           <div>
             <Button
               color={theme.expenseAccentColor}
-              onClick={() => setItemsToEdit(prevState => prevState.filter((oldId) => oldId !== item.id))}
+              onClick={() => setItemsToEdit(prevState => prevState.filter((oldId) => oldId !== item._id))}
               type="button"
             >
               Cancel
@@ -150,6 +189,7 @@ const TransactionForm = ({item, setItemsToEdit}) => {
           </div>
           : <Button color={theme.expenseAccentColor} primary>Add transaction</Button>}
         </div>
+        {error && <StyledTransactionError>{error}</StyledTransactionError>}
       </StyledTransactionForm>
     </StyledTransactionWrapper>
   );

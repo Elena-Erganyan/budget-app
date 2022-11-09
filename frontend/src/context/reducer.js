@@ -1,31 +1,35 @@
 export default function reducer(state, action) {
   switch (action.type) {
+    case 'SET_TRANSACTIONS':
+      return {
+        ...state,
+        transactions: action.payload,
+      };
     case 'DELETE_TRANSACTION':
       return {
         ...state,
-        transactions: state.transactions.filter((item) => item.id !== action.payload),
-      }
+        transactions: state.transactions.filter((item) => item._id !== action.payload),
+      };
     case 'ADD_TRANSACTION':
       return {
         ...state,
         transactions: [
           ...state.transactions,
           action.payload,
-        ].sort((a, b) => b.date - a.date),
-      }
+        ],
+      };
     case 'REPLACE_TRANSACTION':
       return {
-          ...state,
-          transactions: 
-            state.transactions
-            .map(item => item.id === action.payload.id ? action.payload.newItem : item)
-            .sort((a, b) => b.date - a.date),
-        }
+        ...state,
+        transactions: 
+          state.transactions
+            .map(item => item._id === action.payload._id ? action.payload.newItem : item),
+      };
     case 'SAVE_FILTERS':
       return {
         ...state,
         filters: action.payload,
-      }
+      };
     default:
       return state;
   }

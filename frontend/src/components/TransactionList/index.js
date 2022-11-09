@@ -10,11 +10,11 @@ const TransactionList = ({transactions, text}) => {
     <>
       {transactions.length > 0
       ? <StyledTransactionList>{transactions.map(item => {
-        if (itemsToEdit.includes(item.id)) {
+        if (itemsToEdit.includes(item._id)) {
           return (
             <TransactionForm
               item={item}
-              key={item.id}
+              key={item._id}
               setItemsToEdit={setItemsToEdit}
             />
           );
@@ -22,7 +22,7 @@ const TransactionList = ({transactions, text}) => {
           return (
             <TransactionItem
               item={item}
-              key={item.id}
+              key={item._id}
               setItemsToEdit={setItemsToEdit}
             />
           );

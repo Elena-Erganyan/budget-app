@@ -12,7 +12,7 @@ import {
 const { Pencil, Trash } = Icons;
 
 const TransactionItem = ({item, setItemsToEdit}) => {
-  const { amount, type, category, date, title, id } = item;
+  const { amount, type, category, date, title, _id } = item;
   const { deleteTransaction, categoryIcons } = useTransactionContext();
   const theme = useTheme();
 
@@ -20,6 +20,16 @@ const TransactionItem = ({item, setItemsToEdit}) => {
   const color = type === 'Income' ? theme.incomeColor : theme.expenseColor;
 
   const IconComponent = Icons[categoryIcons[category]];
+
+  const deleteHandler = async (id) => {
+    const response = await fetch('/api/transactions/' + id, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      deleteTransaction(id);
+    }
+  };
 
   return (
     <StyledTransactionItem color={color}>
@@ -35,14 +45,14 @@ const TransactionItem = ({item, setItemsToEdit}) => {
       <StyledTransactionButtons>
         <Pencil
           color={color}
-          onClick={() => setItemsToEdit(prevIds => [...prevIds, id])}
+          onClick={() => setItemsToEdit(prevIds => [...prevIds, _id])}
           size={28}
           style={{cursor: 'pointer'}}
           weight="duotone"
         />
         <Trash
           color={color}
-          onClick={() => deleteTransaction(id)}
+          onClick={() => deleteHandler(_id)}
           size={28}
           style={{cursor: 'pointer'}}
           weight="duotone"
