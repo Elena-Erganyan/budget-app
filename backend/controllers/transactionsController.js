@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 
 // get all transactions
 const getTransactions = async (req, res) => {
-  const transactions = await Transaction.find({}).sort({date: -1, createdAt: -1});
+  const user_id = req.user._id;
+  const transactions = await Transaction.find({user_id}).sort({date: -1, createdAt: -1});
   res.status(200).json(transactions);
 };
 
@@ -25,7 +26,8 @@ const addTransaction = async (req, res) => {
 
   // add doc to db
   try {
-    const transaction = await Transaction.create({title, date, type, category, amount});
+    const user_id = req.user._id;
+    const transaction = await Transaction.create({title, date, type, category, amount, user_id});
     res.status(200).json(transaction);
   } catch (error) {
     res.status(400).json({error: error.message});
@@ -49,7 +51,7 @@ const deleteTransaction = async (req, res) => {
   res.status(200).json(transaction);
 };
 
-// delete a transaction
+// update a transaction
 const updateTransaction = async (req, res) => {
   const { id } = req.params;
 
