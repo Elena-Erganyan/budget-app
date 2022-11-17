@@ -10,7 +10,7 @@ export const StyledTransactionItem = styled.div`
   border-left: 1rem solid ${({color}) => color};
   border-radius: 0.7rem;
   background-color: ${({theme}) => theme.backgroundAccentColor};
-  box-shadow: ${({theme}) => theme.backgroundAccentColor === '#ffffff' ? '0 0 2px 1px #cccccc' : 'none'};
+  box-shadow: ${({theme}) => theme.name === 'light' ? '0 0 2px 1px #cccccc' : 'none'};
   color: ${({theme}) => theme.textColor};
   h2 {
     font-size: 2.5rem;

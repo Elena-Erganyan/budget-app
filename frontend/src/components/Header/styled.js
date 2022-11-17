@@ -1,20 +1,23 @@
 import styled from 'styled-components';
 
+export const StyledHeader = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  background-color: ${({theme}) => theme.backgroundAccentColor};
+  box-shadow: ${({theme}) => theme.name === 'light' ? '0 0 2px 1px #cccccc' : 'none'};
+`;
+
 export const StyledHeaderWrapper = styled.div`
   position: relative;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   width: 90%;
-  max-width: 80rem;
+  max-width: 90rem;
 `;
 
-export const StyledHeader = styled.h1`
-  padding: 2rem 1rem 1rem 1rem;
-  font-family: 'Rosa Sans Bold', sans-serif;
-  font-size: 3.5rem;
-  line-height: 1.5;
-  text-align: center;
-  text-transform: capitalize;
-  color: ${({theme}) => theme.expenseColor};
-`;

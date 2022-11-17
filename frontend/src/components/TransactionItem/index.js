@@ -2,6 +2,7 @@ import * as Icons from 'phosphor-react';
 import React from 'react';
 import { useTheme } from 'styled-components';
 import { useTransactionContext } from '../../context/globalState';
+import { useAuthContext } from '../../context/authState';
 import {
   StyledTransactionItem,
   StyledTransactionCategory,
@@ -14,6 +15,7 @@ const { Pencil, Trash } = Icons;
 const TransactionItem = ({item, setItemsToEdit}) => {
   const { amount, type, category, date, title, _id } = item;
   const { deleteTransaction, categoryIcons } = useTransactionContext();
+  const { user } = useAuthContext();
   const theme = useTheme();
 
   const sign = type === 'Income' ? '+' : '-';
@@ -22,8 +24,15 @@ const TransactionItem = ({item, setItemsToEdit}) => {
   const IconComponent = Icons[categoryIcons[category]];
 
   const deleteHandler = async (id) => {
+    if (!user) {
+      return;
+    }
+
     const response = await fetch('/api/transactions/' + id, {
       method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${user.token}`,
+      },
     });
 
     if (response.ok) {

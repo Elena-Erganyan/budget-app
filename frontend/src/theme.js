@@ -1,4 +1,5 @@
 export const lightTheme = {
+  name: 'light',
   incomeColor: '#3F3D54',
   incomeAccentColor: '#7994C0',
   expenseColor: '#770F34',
@@ -8,10 +9,11 @@ export const lightTheme = {
   backgroundAccentColor: '#ffffff',
   incomeColors: ['#A2BDEB', '#7994C0', '#516D97', '#294970'],
   expenseColors: ['#ad6f85', '#a05771', '#923f5d', '#852748', '#770F34', '#5f0c2a'],
-  errorColor: 'lime',
+  errorColor: 'crimson',
 };
   
 export const darkTheme = {
+  name: 'dark',
   incomeColor: '#00C2AE',
   incomeAccentColor: '#009283',
   expenseColor: '#CE8FFF',

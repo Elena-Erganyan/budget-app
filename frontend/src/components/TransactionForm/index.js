@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useTransactionContext } from '../../context/globalState';
+import { useAuthContext } from '../../context/authState';
 import {
   StyledTransactionWrapper,
   StyledTransactionHeader,
   StyledTransactionForm,
-  StyledTransactionLabel,
-  StyledTransactionInput,
   StyledTransactionError,
 } from './styled';
 import Button from '../Button';
+import Input from '../Input';
 import { useTheme } from 'styled-components';
 
 const TransactionForm = ({item, setItemsToEdit}) => {
@@ -28,6 +28,8 @@ const TransactionForm = ({item, setItemsToEdit}) => {
     expenseCategories
   } = useTransactionContext();
 
+  const { user } = useAuthContext();
+
   const theme = useTheme();
 
   const categories = type === 'Income' ? incomeCategories : expenseCategories;
@@ -39,6 +41,11 @@ const TransactionForm = ({item, setItemsToEdit}) => {
 
   const onSubmit = async (evt) => {
     evt.preventDefault();
+
+    if (!user) {
+      setError('You must be logged in');
+      return;
+    }
     
     const transaction = {
       date,
@@ -54,6 +61,7 @@ const TransactionForm = ({item, setItemsToEdit}) => {
         method: 'PATCH',
         body: JSON.stringify(transaction),
         headers: {
+          'Authorization': `Bearer ${user.token}`,
           'Content-Type': 'application/json',
         },
       });
@@ -73,6 +81,7 @@ const TransactionForm = ({item, setItemsToEdit}) => {
         method: 'POST',
         body: JSON.stringify(transaction),
         headers: {
+          'Authorization': `Bearer ${user.token}`,
           'Content-Type': 'application/json',
         },
       });
@@ -99,83 +108,62 @@ const TransactionForm = ({item, setItemsToEdit}) => {
         : <StyledTransactionHeader>New transaction</StyledTransactionHeader>}
       <StyledTransactionForm onSubmit={(evt) => onSubmit(evt)}>
         <div>
-          <StyledTransactionLabel>
-            Date
-            <StyledTransactionInput
-              error={emptyFields.includes('date')}
-              onChange={(evt) => setDate(evt.target.value)}
-              pattern="\d{4}-\d{2}-\d{2}"
-              required
-              type="date"
-              value={date.split('T')[0]}
-            />
-          </StyledTransactionLabel>
-          <StyledTransactionLabel>
-            Title
-            <StyledTransactionInput
-              error={emptyFields.includes('title')}
-              onChange={(evt) => setTitle(evt.target.value)}
-              required
-              type="text"
-              value={title}
-            />
-          </StyledTransactionLabel>
-          <StyledTransactionLabel>
-            Amount
-            <StyledTransactionInput
-              error={emptyFields.includes('amount')}
-              min={0.01}
-              step={0.01}
-              onChange={(evt) => setAmount(+evt.target.value)}
-              required
-              type="number"
-              value={amount}
-            />
-          </StyledTransactionLabel>
+          <Input
+            error={emptyFields.includes('date')}
+            onChange={(evt) => setDate(evt.target.value)}
+            pattern="\d{4}-\d{2}-\d{2}"
+            required={true}
+            text="Date"
+            type="date"
+            value={date.split('T')[0]}
+          />
+          <Input
+            error={emptyFields.includes('title')}
+            onChange={(evt) => setTitle(evt.target.value)}
+            required={true}
+            text="Title"
+            type="text"
+            value={title}
+          />
+          <Input
+            error={emptyFields.includes('amount')}
+            min={0.01}
+            step={0.01}
+            onChange={(evt) => setAmount(+evt.target.value)}
+            required={true}
+            text="Amount"
+            type="number"
+            value={amount}
+          />
         </div>
         <div>
           <div>
-            <StyledTransactionInput
+            <Input
               id={item ? 'income' + item._id : 'income'}
               checked={type === 'Income'}
               color={theme.incomeColor}
               name={item ? 'type' + item._id : 'type'}
               onChange={() => typeHandler('Income')}
+              text="Income"
               type="radio"
             />
-            <StyledTransactionLabel
-              color={theme.incomeColor}
-              htmlFor={item ? 'income' + item._id : 'income'}
-              isSwitch
-            >
-              Income
-            </StyledTransactionLabel>
-            <StyledTransactionInput
+            <Input
               id={item ? 'expense' + item._id : 'expense'}
               checked={type === 'Expense'}
               color={theme.expenseColor}
               name={item ? 'type' + item._id : 'type'}
               onChange={() => typeHandler('Expense')}
+              text="Expense"
               type="radio"
             />
-            <StyledTransactionLabel
-              color={theme.expenseColor}
-              htmlFor={item ? 'expense' + item._id : 'expense'}
-              isSwitch
-            >
-              Expense
-            </StyledTransactionLabel>
           </div>
-          <StyledTransactionLabel>
-            Category
-            <StyledTransactionInput
-              as="select"
-              value={category}
-              onChange={(evt) => setCategory(evt.target.value)}
-            >
-              {categories.map((category, i) => <option key={i}>{category}</option>)}
-            </StyledTransactionInput>
-          </StyledTransactionLabel>
+          <Input
+            text="Category"
+            type="select"
+            value={category}
+            onChange={(evt) => setCategory(evt.target.value)}
+            options={categories.map((category) => ({value: category, text: category}))}
+          />
         {item ?
           <div>
             <Button

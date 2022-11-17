@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const StyledThemeToggler = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
 `;

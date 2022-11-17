@@ -15,7 +15,6 @@ const ManageTransactions = () => {
   return (
     <StyledManageTransactionsWrapper>
       <TransactionFilters
-        filteredTransactions={filteredTransactions}
         setFilteredTransactions={setFilteredTransactions}
       />
       <StyledStatisticsWrapper>

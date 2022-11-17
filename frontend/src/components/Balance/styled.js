@@ -6,7 +6,7 @@ export const StyledBalanceWrapper = styled.div`
   width: 90%;
   margin-bottom: 1.5rem;
   border-radius: 0.7rem;
-  box-shadow: ${({theme}) => theme.backgroundAccentColor === '#ffffff' ? '0 0 2px 1px #cccccc' : 'none'};
+  box-shadow: ${({theme}) => theme.name === 'light' ? '0 0 2px 1px #cccccc' : 'none'};
 `;
 
 export const StyledBalance = styled.div`
