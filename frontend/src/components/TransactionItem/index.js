@@ -56,14 +56,12 @@ const TransactionItem = ({item, setItemsToEdit}) => {
           color={color}
           onClick={() => setItemsToEdit(prevIds => [...prevIds, _id])}
           size={28}
-          style={{cursor: 'pointer'}}
           weight="duotone"
         />
         <Trash
           color={color}
           onClick={() => deleteHandler(_id)}
           size={28}
-          style={{cursor: 'pointer'}}
           weight="duotone"
         />
       </StyledTransactionButtons>

@@ -54,4 +54,8 @@ export const StyledTransactionInfo = styled.div`
 
 export const StyledTransactionButtons = styled.div`
   gap: 1rem;
+
+  svg {
+    cursor: pointer;
+  }
 `;

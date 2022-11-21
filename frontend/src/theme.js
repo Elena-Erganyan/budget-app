@@ -17,7 +17,7 @@ export const darkTheme = {
   incomeColor: '#00C2AE',
   incomeAccentColor: '#009283',
   expenseColor: '#CE8FFF',
-  expenseAccentColor: '#ebd2ff',
+  expenseAccentColor: '#e2bcff',
   textColor: '#f2f2f2',
   backgroundColor: '#222222',
   backgroundAccentColor: '#333333',

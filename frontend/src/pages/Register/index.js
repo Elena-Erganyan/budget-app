@@ -35,7 +35,7 @@ const Register = () => {
         value={password}
       />
       <Button
-        color={theme.incomeAccentColor}
+        color={theme.name === 'light' ? theme.expenseColors[2] : theme.incomeAccentColor}
         disabled={isLoading}
         primary
       >

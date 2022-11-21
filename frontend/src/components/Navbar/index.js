@@ -1,10 +1,18 @@
 import React, { useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useLogout } from '../../customHooks/useLogout';
 import { useAuthContext } from '../../context/authState';
-import { StyledNavbar, StyledMenu, StyledLink, StyledLogo, StyledText, StyledOverlay } from './styled';
 import { useTheme } from 'styled-components';
 import { List, X } from 'phosphor-react';
+import {
+  StyledNavbar,
+  StyledMenu,
+  StyledLink,
+  StyledLogo,
+  StyledText,
+  StyledOverlay,
+  StyledNavButton,
+} from './styled';
 import logo from '../../images/logo.png';
 import logoDark from '../../images/logo-dark.png';
 
@@ -49,12 +57,33 @@ const Navbar = () => {
             Manage transactions
           </StyledLink>
           <StyledText>{user.email}</StyledText>
-          <StyledText color={theme.expenseAccentColor} onClick={logout} status="active">Log out</StyledText>
+          <StyledText
+            color={theme.expenseAccentColor}
+            onClick={logout}
+            status="active"
+          >
+            Log out
+          </StyledText>
           </>
         ) : (
           <>
-            <StyledLink to="/login">Log in</StyledLink>
-            <StyledLink to="/register">Register</StyledLink>
+            <StyledNavButton
+              as={Link}
+              color={theme.expenseColors[2]}
+              status={location.pathname === '/login' ? 'active' : null}
+              to="/login"
+            >
+              Log in
+            </StyledNavButton>
+            <StyledNavButton
+              as={Link}
+              color={theme.expenseColors[2]}
+              status={location.pathname === '/register' ? 'active' : null}
+              to="/register"
+              primary
+            >
+              Register
+            </StyledNavButton>
           </>
         )}
         <X onClick={closeMenu} size={28} />

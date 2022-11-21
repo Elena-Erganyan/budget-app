@@ -35,7 +35,7 @@ const Login = () => {
         value={password}
       />
       <Button
-        color={theme.name === 'light' ? theme.expenseAccentColor : theme.incomeAccentColor}
+        color={theme.name === 'light' ? theme.expenseColors[2] : theme.incomeColor}
         disabled={isLoading}
         primary
       >

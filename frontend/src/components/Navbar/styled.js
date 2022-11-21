@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { StyledButton } from '../Button/styled';
 
 export const StyledNavbar = styled.nav`
   display: flex;
@@ -26,6 +27,7 @@ export const StyledMenu = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
 
   svg {
     display: none;
@@ -80,6 +82,20 @@ export const StyledLink = styled(Link)`
   text-align: center;
   color: ${({status, theme}) => status === 'active' ? theme.expenseColor : theme.expenseAccentColor};
   cursor: ${({status}) => status === 'active' ? 'auto' : 'pointer'};
+`;
+
+export const StyledNavButton = styled(StyledButton)`
+  @media (max-width: 900px) {
+    padding: 1rem;
+    font-size: 2rem;
+    line-height: 1.2;
+    text-decoration: none;
+    text-align: center;
+    color: ${({status, theme}) => status === 'active' ? theme.expenseColor : theme.expenseAccentColor};
+    cursor: ${({status}) => status === 'active' ? 'auto' : 'pointer'};
+    border: none;
+    background-color: transparent;
+  }
 `;
 
 export const StyledText = styled.span`

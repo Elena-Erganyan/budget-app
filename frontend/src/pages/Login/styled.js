@@ -30,5 +30,5 @@ export const StyledLoginForm = styled.form`
 export const StyledLoginLink = styled(Link)`
   font-family: 'Rosa Sans Bold', sans-serif;
   text-decoration: none;
-  color: ${({theme}) => theme.name === 'light' ? theme.expenseColor : theme.incomeColor}
+  color: ${({theme}) => theme.name === 'light' ? theme.expenseColors[2] : theme.incomeColor}
 `;
