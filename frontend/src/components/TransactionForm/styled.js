@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StyledTransactionListText } from "../TransactionList/styled";
+import { StyledError } from '../Error/styled';
 
 export const StyledTransactionWrapper = styled.div`
   display: flex;
@@ -52,6 +52,6 @@ export const StyledTransactionForm = styled.form`
   }
 `;
 
-export const StyledTransactionError = styled(StyledTransactionListText)`
-  color: ${({theme}) => theme.errorColor};
+export const StyledTransactionError = styled(StyledError)`
+  align-self: center;
 `;

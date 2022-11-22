@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useTransactionContext } from '../../context/globalState';
 import { useAuthContext } from '../../context/authState';
+import Button from '../Button';
+import Input from '../Input';
 import {
   StyledTransactionWrapper,
   StyledTransactionHeader,
   StyledTransactionForm,
   StyledTransactionError,
 } from './styled';
-import Button from '../Button';
-import Input from '../Input';
 import { useTheme } from 'styled-components';
 
 const TransactionForm = ({item, setItemsToEdit}) => {
@@ -22,6 +22,7 @@ const TransactionForm = ({item, setItemsToEdit}) => {
   const [emptyFields, setEmptyFields] = useState([]);
 
   const {
+    transactions,
     addTransaction,
     replaceTransaction,
     incomeCategories,
@@ -69,7 +70,9 @@ const TransactionForm = ({item, setItemsToEdit}) => {
       const json = await response.json();
 
       if (response.ok) {
+        // console.log('before', transactions);
         replaceTransaction(item._id, transaction);
+        // console.log('after', transactions);
         setItemsToEdit(prevState => prevState.filter((oldId) => oldId !== item._id));
       } else {
         setError(json.error);
@@ -112,7 +115,6 @@ const TransactionForm = ({item, setItemsToEdit}) => {
             error={emptyFields.includes('date')}
             onChange={(evt) => setDate(evt.target.value)}
             pattern="\d{4}-\d{2}-\d{2}"
-            required={true}
             text="Date"
             type="date"
             value={date.split('T')[0]}
@@ -120,7 +122,6 @@ const TransactionForm = ({item, setItemsToEdit}) => {
           <Input
             error={emptyFields.includes('title')}
             onChange={(evt) => setTitle(evt.target.value)}
-            required={true}
             text="Title"
             type="text"
             value={title}
@@ -130,7 +131,6 @@ const TransactionForm = ({item, setItemsToEdit}) => {
             min={0.01}
             step={0.01}
             onChange={(evt) => setAmount(+evt.target.value)}
-            required={true}
             text="Amount"
             type="number"
             value={amount}

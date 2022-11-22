@@ -80,7 +80,7 @@ const Navbar = () => {
               color={theme.expenseColors[2]}
               status={location.pathname === '/register' ? 'active' : null}
               to="/register"
-              primary
+              primary="true"
             >
               Register
             </StyledNavButton>

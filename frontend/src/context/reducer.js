@@ -19,6 +19,7 @@ export default function reducer(state, action) {
         ],
       };
     case 'REPLACE_TRANSACTION':
+      // console.log("I'm replacing", action.payload);
       return {
         ...state,
         transactions: 
