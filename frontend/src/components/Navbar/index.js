@@ -1,14 +1,16 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLogout } from '../../customHooks/useLogout';
 import { useAuthContext } from '../../context/authState';
-import { useTheme } from 'styled-components';
 import { List, X } from 'phosphor-react';
+import { useTheme } from 'styled-components';
 import {
   StyledNavbar,
   StyledMenu,
   StyledLink,
   StyledLogo,
+  StyledLogoImg,
+  StyledLogoText,
   StyledText,
   StyledOverlay,
   StyledNavButton,
@@ -43,33 +45,49 @@ const Navbar = () => {
         to="/"
       >
         <StyledLogo>
-          <img alt='logo' src={theme.name === 'light' ? logo : logoDark} />
-          <span>Budget App</span>
+          <StyledLogoImg alt='logo' src={theme.name === 'light' ? logo : logoDark} />
+          <StyledLogoText>Budget App</StyledLogoText>
         </StyledLogo>
       </StyledLink>
       <StyledMenu ref={menuRef}>
+        <StyledLink
+          inner='true'
+          onClick={closeMenu}
+          status={location.pathname === '/' ? 'active' : null}
+          to="/"
+        >
+          <StyledLogo>
+            <StyledLogoImg alt='logo' src={theme.name === 'light' ? logo : logoDark} />
+            <StyledLogoText>Budget App</StyledLogoText>
+          </StyledLogo>
+        </StyledLink>
         {user ? (
           <>
-          <StyledLink
-            status={location.pathname === '/manage-transactions' ? 'active' : null}
-            to="/manage-transactions"
-          >
-            Manage transactions
-          </StyledLink>
-          <StyledText>{user.email}</StyledText>
-          <StyledText
-            color={theme.expenseAccentColor}
-            onClick={logout}
-            status="active"
-          >
-            Log out
-          </StyledText>
+            <StyledLink
+              onClick={closeMenu}
+              status={location.pathname === '/manage-transactions' ? 'active' : null}
+              to="/manage-transactions"
+            >
+              Manage transactions
+            </StyledLink>
+            <StyledText>{user.email}</StyledText>
+            <StyledText
+              color={theme.expenseAccentColor}
+              onClick={() => {
+                logout();
+                closeMenu();
+              }}
+              status="active"
+            >
+              Log out
+            </StyledText>
           </>
         ) : (
           <>
             <StyledNavButton
               as={Link}
               color={theme.expenseColors[2]}
+              onClick={closeMenu}
               status={location.pathname === '/login' ? 'active' : null}
               to="/login"
             >
@@ -78,9 +96,10 @@ const Navbar = () => {
             <StyledNavButton
               as={Link}
               color={theme.expenseColors[2]}
+              onClick={closeMenu}
+              primary="true"
               status={location.pathname === '/register' ? 'active' : null}
               to="/register"
-              primary="true"
             >
               Register
             </StyledNavButton>

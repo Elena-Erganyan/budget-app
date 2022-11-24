@@ -16,15 +16,15 @@ export default function reducer(state, action) {
         transactions: [
           ...state.transactions,
           action.payload,
-        ],
+        ].sort((a, b) => a.date < b.date ? 1 : a.date > b.date ? -1 : 0),
       };
     case 'REPLACE_TRANSACTION':
-      // console.log("I'm replacing", action.payload);
       return {
         ...state,
         transactions: 
           state.transactions
-            .map(item => item._id === action.payload._id ? action.payload.newItem : item),
+            .map(item => item._id === action.payload._id ? action.payload : item)
+            .sort((a, b) => a.date < b.date ? 1 : a.date > b.date ? -1 : 0),
       };
     case 'SAVE_FILTERS':
       return {

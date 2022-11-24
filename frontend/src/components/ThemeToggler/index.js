@@ -1,4 +1,3 @@
-import React from 'react';
 import { Moon, Sun } from 'phosphor-react';
 import { StyledThemeToggler } from './styled';
 

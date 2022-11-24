@@ -1,4 +1,3 @@
-import React from 'react';
 import Navbar from '../Navbar';
 import ThemeToggler from '../ThemeToggler';
 import { StyledHeader, StyledHeaderWrapper } from './styled';

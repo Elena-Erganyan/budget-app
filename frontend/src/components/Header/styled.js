@@ -20,4 +20,3 @@ export const StyledHeaderWrapper = styled.div`
   width: 90%;
   max-width: 90rem;
 `;
-

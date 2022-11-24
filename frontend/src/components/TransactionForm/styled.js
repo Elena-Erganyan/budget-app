@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { StyledButton } from "../Button/styled";
 import { StyledError } from '../Error/styled';
 
 export const StyledTransactionWrapper = styled.div`
@@ -20,35 +21,54 @@ export const StyledTransactionForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  div {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 2rem;
-    div {
-      position: relative;
-      width: 33%;
-      button {
-        width: auto;
-      }
-    }
-  }
-  button {
-    flex-grow: 1;
-    width: 33%;
-    min-height: 3.4rem;
-  }
+`;
+
+export const StyledFieldsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+
   @media (max-width: 600px) {
-    & > div {
-      flex-direction: column;
-      align-items: center;
-      div {
-        width: auto;
-      }
-    }
-    button {
-      width: auto;
-    }
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
+export const StyledTypesWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+  position: relative;
+  width: 33%;
+
+  @media (max-width: 600px) {
+    width: auto;
+  }
+`;
+
+export const StyledButtons = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+  position: relative;
+  width: 33%;
+
+  @media (max-width: 600px) {
+    width: auto;
+  }
+`;
+
+export const StyledFormButton = styled(StyledButton)`
+  flex-grow: 1;
+  order: ${({primary}) => primary ? 1 : 0};
+  width: ${({edit}) => edit ? 'auto' : '33%'};
+  min-height: 3.4rem;
+
+  @media (max-width: 600px) {
+    width: auto;
   }
 `;
 

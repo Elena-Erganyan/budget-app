@@ -1,4 +1,3 @@
-import React from 'react';
 import Balance from '../../components/Balance';
 import TransactionForm from '../../components/TransactionForm';
 import TransactionHistory from '../../components/TransactionHistory';

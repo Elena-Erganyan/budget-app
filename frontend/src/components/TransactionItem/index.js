@@ -1,5 +1,4 @@
 import * as Icons from 'phosphor-react';
-import React from 'react';
 import { useTheme } from 'styled-components';
 import { useTransactionContext } from '../../context/globalState';
 import { useAuthContext } from '../../context/authState';
@@ -8,6 +7,7 @@ import {
   StyledTransactionCategory,
   StyledTransactionInfo,
   StyledTransactionButtons,
+  StyledItemText,
 } from './styled';
 
 const { Pencil, Trash } = Icons;
@@ -42,14 +42,14 @@ const TransactionItem = ({item, setItemsToEdit}) => {
 
   return (
     <StyledTransactionItem color={color}>
-      <StyledTransactionCategory color={color}>
+      <StyledTransactionCategory>
         <IconComponent color={color} size={28} weight="duotone" />
-        <span>{category}</span>
+        <StyledItemText color={color}>{category}</StyledItemText>
       </StyledTransactionCategory>
-      <StyledTransactionInfo color={color}>
-        <span>{new Date(date).toISOString().split('T')[0]}</span>
-        <span>{title}</span>
-        <span>{sign}${amount}</span>
+      <StyledTransactionInfo>
+        <StyledItemText>{new Date(date).toISOString().split('T')[0]}</StyledItemText>
+        <StyledItemText>{title}</StyledItemText>
+        <StyledItemText color={color}>{sign}${amount}</StyledItemText>
       </StyledTransactionInfo>
       <StyledTransactionButtons>
         <Pencil

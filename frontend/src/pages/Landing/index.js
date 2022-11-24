@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useTheme } from "styled-components";
+import Button from "../../components/Button";
 import {
   PlusCircle,
   Scales,
@@ -7,13 +8,17 @@ import {
   DesktopTower,
   ChartLineUp,
 } from 'phosphor-react';
-import Button from "../../components/Button";
 import {
   StyledLanding,
   StyledLandingSection,
+  StyledLandingTextWrapper,
+  StyledLandingHeader,
   StyledLandingText,
+  StyledLandingImage,
   StyledLandingFeaturesWrapper,
+  StyledLandingSmallHeader,
   StyledLandingFeatures,
+  StyledLandingFeatureContainer,
   StyledLandingFeature,
 } from "./styled";
 import devicesLight from '../../images/devices-light.png';
@@ -27,13 +32,13 @@ const Landing = () => {
   return (
     <StyledLanding>
       <StyledLandingSection>
-        <img
-          alt='Devices with Budget App'
+        <StyledLandingImage
+          alt='Devices with the Budget App'
           src={theme.name === 'light' ? devicesLight : devicesDark}
         />
-        <StyledLandingText>
-          <h1>Manage your finance easily with Budget App</h1>
-          <p>Start tracking your income and expenses</p>
+        <StyledLandingTextWrapper>
+          <StyledLandingHeader>Manage your finance easily with Budget App</StyledLandingHeader>
+          <StyledLandingText>Start tracking your income and expenses</StyledLandingText>
           <Button
             color={theme.incomeColors[2]}
             as={Link}
@@ -42,40 +47,40 @@ const Landing = () => {
           >
             Let's get started
           </Button>
-        </StyledLandingText>
+        </StyledLandingTextWrapper>
       </StyledLandingSection>
       <StyledLandingSection features>
         <StyledLandingFeaturesWrapper>
-          <h1>How it works</h1>
+          <StyledLandingSmallHeader>How it works</StyledLandingSmallHeader>
           <StyledLandingFeatures>
-            <StyledLandingFeature>
+            <StyledLandingFeatureContainer>
               <PlusCircle color={theme.incomeColors[2]} size={28} weight="duotone" />
-              <p>Add your income and expenses day after day</p>
-            </StyledLandingFeature>
-            <StyledLandingFeature>
+              <StyledLandingFeature>Add your income and expenses day after day</StyledLandingFeature>
+            </StyledLandingFeatureContainer>
+            <StyledLandingFeatureContainer>
               <Scales color={theme.incomeColors[2]} size={28} weight="duotone" />
-              <p>Control your balance</p>
-            </StyledLandingFeature>
-            <StyledLandingFeature>
+              <StyledLandingFeature>Control your balance</StyledLandingFeature>
+            </StyledLandingFeatureContainer>
+            <StyledLandingFeatureContainer>
               <ChartLineUp color={theme.incomeColors[2]} size={28} weight="duotone" />
-              <p>Use charts for any period of time</p>
-            </StyledLandingFeature>
-            <StyledLandingFeature>
+              <StyledLandingFeature>Use charts for any period of time</StyledLandingFeature>
+            </StyledLandingFeatureContainer>
+            <StyledLandingFeatureContainer>
               <ChartPieSlice color={theme.incomeColors[2]} size={28} weight="duotone" />
-              <p>See the structure of your income and expenses</p>
-            </StyledLandingFeature>
-            <StyledLandingFeature>
+              <StyledLandingFeature>See the structure of your income and expenses</StyledLandingFeature>
+            </StyledLandingFeatureContainer>
+            <StyledLandingFeatureContainer>
               <DesktopTower color={theme.incomeColors[2]} size={28} weight="duotone" />
-              <p>Use the app from any device</p>
-            </StyledLandingFeature>
+              <StyledLandingFeature>Use the app from any device</StyledLandingFeature>
+            </StyledLandingFeatureContainer>
           </StyledLandingFeatures>
         </StyledLandingFeaturesWrapper>
-        <img
+        <StyledLandingImage
           alt='Phone with a graph'
           src={theme.name === 'light' ? phoneLight : phoneDark}
+          features={true}
         />
       </StyledLandingSection>
-      
     </StyledLanding>
   );
 };

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 import reducer from './reducer';
 
 const initialState = {
@@ -64,10 +64,10 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
-  function replaceTransaction(id, newItem) {
+  function replaceTransaction(newItem) {
     dispatch({
       type: 'REPLACE_TRANSACTION',
-      payload: { id, newItem },
+      payload: newItem,
     });
   }
 

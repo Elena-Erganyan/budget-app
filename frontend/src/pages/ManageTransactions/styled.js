@@ -43,19 +43,6 @@ export const StyledManageTransactions = styled.div`
   & > div > div {
     flex-direction: column;
   }
-  form > div {
-    flex-direction: column;
-    align-items: center;
-    div {
-      width: auto;
-    }
-    label {
-      width: 100%;
-    }
-    button {
-      width: auto;
-    }
-  }  
   @media (max-width: 600px) {
     width: 100%;
   }

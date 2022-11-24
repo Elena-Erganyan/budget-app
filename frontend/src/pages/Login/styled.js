@@ -10,21 +10,21 @@ export const StyledLoginForm = styled.form`
   gap: 2rem;
   padding: 2rem;
 
-  h3 {
-    font-size: 2rem;
-    line-height: 1.5;
-  }
-
-  p {
-    font-size: 1.7rem;
-    line-height: 1.2;
-    text-align: center;
-  }
-
   label {
     width: 100%;
     max-width: 30rem;
   }
+`;
+
+export const StyledLoginHeader = styled.h2`
+  font-size: 2rem;
+  line-height: 1.5;
+`;
+
+export const StyledLoginText = styled.p`
+  font-size: 1.7rem;
+  line-height: 1.2;
+  text-align: center;
 `;
 
 export const StyledLoginLink = styled(Link)`

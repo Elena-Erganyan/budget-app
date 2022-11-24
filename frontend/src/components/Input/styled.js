@@ -42,7 +42,7 @@ export const StyledInput = styled.input`
   padding: 0.5rem;
   background-color: ${({theme}) => theme.backgroundAccentColor}; 
   color: ${({theme}) => theme.textColor};
-  border: ${({theme, error}) => error ? `2px solid ${theme.errorColor}` : 'none'};
+  border: ${({error}) => error ? `2px solid crimson` : 'none'};
   border-radius: 0.3rem;
   box-shadow: ${({theme}) => theme.name === 'light' ? '0 0 2px 1px #cccccc' : 'none'};
 

@@ -13,7 +13,15 @@ export const sortTransactions = (a, b, sortType) => {
   }
 };
 
-export const filterTransactions = (setFilteredTransactions, transactions, category, type, startDate, endDate, sortType) => {
+export const filterTransactions = (
+  setFilteredTransactions,
+  transactions,
+  category,
+  type,
+  startDate,
+  endDate,
+  sortType
+) => {
   if (category === 'All') {
     setFilteredTransactions(transactions.filter((item) => {
       return type === item.type &&

@@ -63,25 +63,30 @@ export const StyledLogo = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  
-  img {
-    width: 3.5rem;
-  }
+`;
 
-  span {
-    font-family: 'Rosa Sans Bold', sans-serif;
-    color: ${({theme}) => theme.name === 'light' ? theme.incomeColor : theme.expenseColor};
-  }
+export const StyledLogoImg = styled.img`
+  width: 3.5rem;
+`;
+
+export const StyledLogoText = styled.span`
+  font-family: 'Rosa Sans Bold', sans-serif;
+  color: ${({theme}) => theme.name === 'light' ? theme.incomeColor : theme.expenseColor};
 `;
 
 export const StyledLink = styled(Link)`
-  padding: 1rem;
+  display: ${({inner}) => inner ? 'none' : 'block'};
+  padding: ${({inner}) => inner ? '0 1rem' : '1rem'};
   font-size: 2rem;
   line-height: 1.2;
   text-decoration: none;
   text-align: center;
   color: ${({status, theme}) => status === 'active' ? theme.expenseColor : theme.expenseAccentColor};
   cursor: ${({status}) => status === 'active' ? 'auto' : 'pointer'};
+
+  @media (max-width: 900px) {
+    display: block;
+  }
 `;
 
 export const StyledNavButton = styled(StyledButton)`

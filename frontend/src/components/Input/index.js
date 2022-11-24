@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import {Eye, EyeClosed} from 'phosphor-react';
+import { useRef, useState } from 'react';
+import { Eye, EyeClosed } from 'phosphor-react';
 import { StyledLabel, StyledInput } from './styled';
 
 const Input = ({
@@ -49,33 +49,33 @@ const Input = ({
           </StyledLabel>
         </>
       ) : type === 'select' 
-      ? (
+        ? (
+          <StyledLabel>
+            {text}
+            <StyledInput
+              as="select"
+              value={value}
+              onChange={onChange}
+            >
+              {options.map((option, i) => (
+                <option key={i} value={option.value}>{option.text}</option>)
+              )}
+            </StyledInput>
+          </StyledLabel>
+      ) : (
         <StyledLabel>
           {text}
-          <StyledInput
-            as="select"
-            value={value}
-            onChange={onChange}
-          >
-            {options.map((option, i) => (
-              <option key={i} value={option.value}>{option.text}</option>)
-            )}
-          </StyledInput>
-        </StyledLabel>
-    ) : (
-      <StyledLabel>
-        {text}
-        {type === 'password' && (
-          isVisible
-            ? <Eye 
-                onClick={togglePasswordVisibility}
-                size={28}
-              />
-            : <EyeClosed
-                onClick={togglePasswordVisibility}
-                size={28}
-              />
-        )}
+          {type === 'password' && (
+            isVisible
+              ? <Eye 
+                  onClick={togglePasswordVisibility}
+                  size={28}
+                />
+              : <EyeClosed
+                  onClick={togglePasswordVisibility}
+                  size={28}
+                />
+          )}
         <StyledInput
           error={error}
           min={min}

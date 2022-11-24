@@ -14,7 +14,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-});
+}, { timestamps: true });
 
 // static register method
 userSchema.statics.register = async function (email, password) {
@@ -32,7 +32,7 @@ userSchema.statics.register = async function (email, password) {
   const exists = await this.findOne({ email });
 
   if (exists) {
-    throw Error('Email already in use');
+    throw Error('Email is already in use');
   }
 
   const salt = await bcrypt.genSalt(10);

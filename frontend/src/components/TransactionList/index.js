@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import TransactionForm from '../TransactionForm';
 import TransactionItem from '../TransactionItem';
 import { StyledTransactionList, StyledTransactionListText } from './styled';

@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useTransactionContext } from '../../context/globalState';
+import { useAuthContext } from '../../context/authState';
 import { filterTransactions } from './utils';
 import Input from '../Input';
 import { StyledManageTransactionsForm } from './styled';
 import { useTheme } from 'styled-components';
+import { StyledFieldsWrapper, StyledTypesWrapper } from '../TransactionForm/styled';
 
 const TransactionFilters = ({setFilteredTransactions}) => {
   const {
@@ -13,12 +15,13 @@ const TransactionFilters = ({setFilteredTransactions}) => {
     filters,
     saveFilters,
   } = useTransactionContext();
+  const { user } = useAuthContext();
 
   const theme = useTheme();
   
   const [type, setType] = useState(filters.type);
   const [category, setCategory] = useState(filters.category);
-  const [startDate, setStartDate] = useState(filters.startDate);
+  const [startDate, setStartDate] = useState(user.createdAt.split('T')[0]);
   const [endDate, setEndDate] = useState(filters.endDate);
   const [sortType, setSortType] = useState(filters.sortType);
 
@@ -37,8 +40,8 @@ const TransactionFilters = ({setFilteredTransactions}) => {
 
   return (
     <StyledManageTransactionsForm>
-      <div>
-        <div>
+      <StyledFieldsWrapper>
+        <StyledTypesWrapper>
           <Input
             checked={type === 'Income'}
             color={theme.incomeColor}
@@ -57,7 +60,7 @@ const TransactionFilters = ({setFilteredTransactions}) => {
             text="Expense"
             type="radio"
           />
-        </div>
+        </StyledTypesWrapper>
         <Input
           onChange={(evt) => setStartDate(evt.target.value)}
           pattern="\d{4}-\d{2}-\d{2}"
@@ -72,8 +75,8 @@ const TransactionFilters = ({setFilteredTransactions}) => {
           type="date"
           value={endDate} 
         />
-      </div>
-      <div>
+      </StyledFieldsWrapper>
+      <StyledFieldsWrapper>
         <Input
           onChange={(evt) => setCategory(evt.target.value)}
           options={[
@@ -96,7 +99,7 @@ const TransactionFilters = ({setFilteredTransactions}) => {
           type="select"
           value={sortType}
         />
-      </div>
+      </StyledFieldsWrapper>
     </StyledManageTransactionsForm>
   );
 };

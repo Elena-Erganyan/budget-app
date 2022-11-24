@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import { useLogin } from '../../customHooks/useLogin';
-import { useTheme } from 'styled-components';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import Error from '../../components/Error';
-import { StyledLoginForm, StyledLoginLink } from './styled';
+import { useTheme } from 'styled-components';
+import {
+  StyledLoginForm,
+  StyledLoginLink,
+  StyledLoginHeader,
+  StyledLoginText,
+} from './styled';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -21,7 +26,7 @@ const Login = () => {
 
   return (
     <StyledLoginForm onSubmit={handleSubmit}>
-      <h3>Log in</h3>
+      <StyledLoginHeader>Log in</StyledLoginHeader>
       <Input
         text="Email:"
         type="email"
@@ -41,7 +46,9 @@ const Login = () => {
       >
         Log in
       </Button>
-      <p>Don't have an account yet? <StyledLoginLink to='/register'>Register</StyledLoginLink></p>
+      <StyledLoginText>
+        Don't have an account yet? <StyledLoginLink to='/register'>Register</StyledLoginLink>
+      </StyledLoginText>
       {error && <Error>{error}</Error>}
     </StyledLoginForm>
   );

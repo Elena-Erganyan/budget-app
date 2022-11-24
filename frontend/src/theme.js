@@ -9,7 +9,6 @@ export const lightTheme = {
   backgroundAccentColor: '#ffffff',
   incomeColors: ['#A2BDEB', '#7994C0', '#516D97', '#294970'],
   expenseColors: ['#ad6f85', '#a05771', '#923f5d', '#852748', '#770F34', '#5f0c2a'],
-  errorColor: 'crimson',
 };
   
 export const darkTheme = {
@@ -23,5 +22,4 @@ export const darkTheme = {
   backgroundAccentColor: '#333333',
   incomeColors: ['#b3ede7', '#59d7ca', '#00C2AE', '#009B89'],
   expenseColors: ['#FAB8FF', '#e2bcff', '#CE8FFF', '#A76BD7', '#a572cc', '#8047B0'],
-  errorColor: 'crimson',
 };

@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTransactionContext } from '../../context/globalState';
 import { useAuthContext } from '../../context/authState';
-import Button from '../Button';
 import Input from '../Input';
 import {
   StyledTransactionWrapper,
   StyledTransactionHeader,
   StyledTransactionForm,
+  StyledFieldsWrapper,
+  StyledTypesWrapper,
   StyledTransactionError,
+  StyledButtons,
+  StyledFormButton,
 } from './styled';
 import { useTheme } from 'styled-components';
 
@@ -22,7 +25,6 @@ const TransactionForm = ({item, setItemsToEdit}) => {
   const [emptyFields, setEmptyFields] = useState([]);
 
   const {
-    transactions,
     addTransaction,
     replaceTransaction,
     incomeCategories,
@@ -70,9 +72,7 @@ const TransactionForm = ({item, setItemsToEdit}) => {
       const json = await response.json();
 
       if (response.ok) {
-        // console.log('before', transactions);
-        replaceTransaction(item._id, transaction);
-        // console.log('after', transactions);
+        replaceTransaction(json);
         setItemsToEdit(prevState => prevState.filter((oldId) => oldId !== item._id));
       } else {
         setError(json.error);
@@ -92,7 +92,7 @@ const TransactionForm = ({item, setItemsToEdit}) => {
       const json = await response.json();
 
       if (response.ok) {
-        addTransaction(transaction);
+        addTransaction(json);
         setEmptyFields([]);
         setError(null);
         setTitle('');
@@ -110,7 +110,7 @@ const TransactionForm = ({item, setItemsToEdit}) => {
         ? <StyledTransactionHeader>Edit transaction</StyledTransactionHeader>
         : <StyledTransactionHeader>New transaction</StyledTransactionHeader>}
       <StyledTransactionForm onSubmit={(evt) => onSubmit(evt)}>
-        <div>
+        <StyledFieldsWrapper>
           <Input
             error={emptyFields.includes('date')}
             onChange={(evt) => setDate(evt.target.value)}
@@ -135,9 +135,9 @@ const TransactionForm = ({item, setItemsToEdit}) => {
             type="number"
             value={amount}
           />
-        </div>
-        <div>
-          <div>
+        </StyledFieldsWrapper>
+        <StyledFieldsWrapper>
+          <StyledTypesWrapper>
             <Input
               id={item ? 'income' + item._id : 'income'}
               checked={type === 'Income'}
@@ -156,7 +156,7 @@ const TransactionForm = ({item, setItemsToEdit}) => {
               text="Expense"
               type="radio"
             />
-          </div>
+          </StyledTypesWrapper>
           <Input
             text="Category"
             type="select"
@@ -165,18 +165,19 @@ const TransactionForm = ({item, setItemsToEdit}) => {
             options={categories.map((category) => ({value: category, text: category}))}
           />
         {item ?
-          <div>
-            <Button
+          <StyledButtons>
+            <StyledFormButton color={theme.expenseAccentColor} primary edit>Save changes</StyledFormButton>
+            <StyledFormButton
               color={theme.expenseAccentColor}
+              edit
               onClick={() => setItemsToEdit(prevState => prevState.filter((oldId) => oldId !== item._id))}
               type="button"
             >
               Cancel
-            </Button>
-            <Button color={theme.expenseAccentColor} primary>Save changes</Button>
-          </div>
-          : <Button color={theme.expenseAccentColor} primary>Add transaction</Button>}
-        </div>
+            </StyledFormButton>
+          </StyledButtons>
+          : <StyledFormButton color={theme.expenseAccentColor} primary>Add transaction</StyledFormButton>}
+        </StyledFieldsWrapper>
         {error && <StyledTransactionError>{error}</StyledTransactionError>}
       </StyledTransactionForm>
     </StyledTransactionWrapper>
