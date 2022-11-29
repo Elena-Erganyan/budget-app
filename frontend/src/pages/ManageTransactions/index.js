@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import TransactionList from '../../components/TransactionList';
 import TransactionFilters from '../../components/TransactionFilters';
 import DoughnutChart from '../../components/DoughnutChart';
@@ -6,7 +6,7 @@ import {
   StyledManageTransactionsWrapper,
   StyledStatisticsWrapper,
   StyledGraphWrapper,
-  StyledManageTransactions
+  StyledManageTransactions,
 } from './styled';
 
 const ManageTransactions = () => {
@@ -15,7 +15,6 @@ const ManageTransactions = () => {
   return (
     <StyledManageTransactionsWrapper>
       <TransactionFilters
-        filteredTransactions={filteredTransactions}
         setFilteredTransactions={setFilteredTransactions}
       />
       <StyledStatisticsWrapper>

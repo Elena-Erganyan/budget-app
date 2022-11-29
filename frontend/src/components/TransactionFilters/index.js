@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useTransactionContext } from '../../context/globalState';
 import { filterTransactions } from './utils';
-import { StyledTransactionLabel, StyledTransactionInput } from '../TransactionForm/styled';
+import Input from '../Input';
 import { StyledManageTransactionsForm } from './styled';
 import { useTheme } from 'styled-components';
+import { StyledFieldsWrapper, StyledTypesWrapper } from '../TransactionForm/styled';
 
-const TransactionFilters = ({filteredTransactions, setFilteredTransactions}) => {
+const TransactionFilters = ({setFilteredTransactions}) => {
   const {
     transactions,
     incomeCategories,
@@ -37,84 +38,68 @@ const TransactionFilters = ({filteredTransactions, setFilteredTransactions}) => 
 
   return (
     <StyledManageTransactionsForm>
-      <div>
-        <div>
-          <StyledTransactionInput
-            id="incomeFilter"
+      <StyledFieldsWrapper>
+        <StyledTypesWrapper>
+          <Input
             checked={type === 'Income'}
             color={theme.incomeColor}
+            id="incomeFilter"
+            isSwitch={true}
             name="transactionType"
             onChange={() => typeHandler('Income')}
+            text="Income"
             type="radio"
           />
-          <StyledTransactionLabel
-            color={theme.incomeColor}
-            htmlFor="incomeFilter"
-            isSwitch
-          >
-            Income
-          </StyledTransactionLabel>
-          <StyledTransactionInput
-            id="expenseFilter"
+          <Input
             checked={type === 'Expense'}
             color={theme.expenseColor}
+            isSwitch={true}
+            id="expenseFilter"
             name="transactionType"
             onChange={() => typeHandler('Expense')}
+            text="Expense"
             type="radio"
           />
-          <StyledTransactionLabel
-            color={theme.expenseColor}
-            htmlFor="expenseFilter"
-            isSwitch
-          >
-            Expense
-          </StyledTransactionLabel>
-        </div>
-        <StyledTransactionLabel>
-          From
-          <StyledTransactionInput
-            onChange={(evt) => setStartDate(evt.target.value)}
-            pattern="\d{4}-\d{2}-\d{2}"
-            type="date"
-            value={startDate} 
-          />
-        </StyledTransactionLabel>
-        <StyledTransactionLabel>
-          To
-          <StyledTransactionInput
-            onChange={(evt) => setEndDate(evt.target.value)}
-            pattern="\d{4}-\d{2}-\d{2}"
-            type="date"
-            value={endDate} 
-          />
-        </StyledTransactionLabel>
-      </div>
-      <div>
-        <StyledTransactionLabel>
-          Category
-          <StyledTransactionInput
-            as="select"
-            value={category}
-            onChange={(evt) => setCategory(evt.target.value)}
-          >
-            <option value="All">All categories</option>
-            {categories.map((category, i) => <option key={i}>{category}</option>)}
-          </StyledTransactionInput>
-        </StyledTransactionLabel>
-        <StyledTransactionLabel>
-          Sort by
-          <StyledTransactionInput
-            as="select"
-            value={sortType}
-            onChange={(evt) => setSortType(evt.target.value)}
-          >
-            <option value="dateDesc">Date (oldest)</option>
-            <option value="dateAsc">Date (newest)</option>
-            <option value="amountAsc">Amount (lowest)</option>
-            <option value="amountDesc">Amount (highest)</option>
-          </StyledTransactionInput>
-        </StyledTransactionLabel>
-      </div>
+        </StyledTypesWrapper>
+        <Input
+          onChange={(evt) => setStartDate(evt.target.value)}
+          pattern="\d{4}-\d{2}-\d{2}"
+          text="From"
+          type="date"
+          value={startDate} 
+        />
+        <Input
+          onChange={(evt) => setEndDate(evt.target.value)}
+          pattern="\d{4}-\d{2}-\d{2}"
+          text="To"
+          type="date"
+          value={endDate} 
+        />
+      </StyledFieldsWrapper>
+      <StyledFieldsWrapper>
+        <Input
+          onChange={(evt) => setCategory(evt.target.value)}
+          options={[
+            {value: 'All', text: 'All categories'},
+            ...categories.map((category) => ({value: category, text: category})),
+          ]}
+          text="Category"
+          type="select"
+          value={category}
+        />
+        <Input
+          onChange={(evt) => setSortType(evt.target.value)}
+          options={[
+            {value: 'dateDesc', text: 'Date (oldest)'},
+            {value: 'dateAsc', text: 'Date (newest)'},
+            {value: 'amountAsc', text: 'Amount (lowest)'},
+            {value: 'amountDesc', text: 'Amount (highest)'},
+          ]}
+          text="Sort by"
+          type="select"
+          value={sortType}
+        />
+      </StyledFieldsWrapper>
     </StyledManageTransactionsForm>
   );
 };

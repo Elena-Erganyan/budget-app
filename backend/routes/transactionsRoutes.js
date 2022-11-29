@@ -6,6 +6,10 @@ const {
   deleteTransaction,
   updateTransaction,
 } = require('../controllers/transactionsController');
+const requireAuth = require('../middleware/requireAuth');
+
+// require auth for all transaction routes
+router.use(requireAuth);
 
 // get all transactions
 router.get('/', getTransactions);

@@ -1,15 +1,15 @@
-import React from 'react';
 import Navbar from '../Navbar';
 import ThemeToggler from '../ThemeToggler';
-import { StyledHeaderWrapper, StyledHeader } from './styled';
+import { StyledHeader, StyledHeaderWrapper } from './styled';
 
 const Header = ({ theme, toggleTheme }) => {
   return (
-    <StyledHeaderWrapper>
-      <StyledHeader>Budget app</StyledHeader>
+    <StyledHeader>
+      <StyledHeaderWrapper>
         <Navbar />
         <ThemeToggler theme={theme} toggleTheme={toggleTheme}/>
-    </StyledHeaderWrapper>
+      </StyledHeaderWrapper>
+    </StyledHeader>
   );
 };
 

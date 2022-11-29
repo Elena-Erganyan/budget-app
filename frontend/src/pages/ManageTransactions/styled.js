@@ -14,14 +14,17 @@ export const StyledManageTransactionsWrapper = styled.div`
 
 export const StyledStatisticsWrapper = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-start;
+  
   width: 90%;
   row-gap: 2rem;
   column-gap: 6%;
-  @media (max-width: 600px) {
-    flex-direction: column;
-    align-items: center;
+  
+  @media (min-width: 601px) {
+    flex-direction: row;
+    align-items: flex-start;
   }
 `;
 
@@ -29,34 +32,27 @@ export const StyledGraphWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  order: 1;
-  max-width: 40rem;
-  width: 45%;
-  @media (max-width: 600px) {
-    order: 0;
-    width: 80%;
+  order: 0;
+  max-width: 36rem;
+  width: 100%;
+
+  @media (min-width: 601px) {
+    order: 1;
   }
 `;
 
 export const StyledManageTransactions = styled.div`
-  flex-grow: 1;
-  & > div > div {
-    flex-direction: column;
-  }
+  max-height: calc(100vh - 80vw); // subtracting the height of the doughnut chart
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  width: 100%;
+
+  & > div > div,
   form > div {
     flex-direction: column;
-    align-items: center;
-    div {
-      width: auto;
-    }
-    label {
-      width: 100%;
-    }
-    button {
-      width: auto;
-    }
-  }  
-  @media (max-width: 600px) {
-    width: 100%;
+  }
+
+  @media (min-width: 601px) {
+    max-height: calc(100vh - 25rem); // subtracting the height of the header and filters
   }
 `;

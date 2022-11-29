@@ -17,8 +17,8 @@ app.use((req, res, next) => {
 });
 
 // routes
-app.use('/api/transactions', transactionsRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/transactions', transactionsRoutes);
 
 // connect to db
 mongoose.connect(process.env.MONGODB_URI)

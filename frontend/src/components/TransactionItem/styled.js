@@ -1,7 +1,9 @@
 import styled from 'styled-components';
+import { fadeIn } from '../../components/generalAnimations';
 
 export const StyledTransactionItem = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
@@ -10,48 +12,58 @@ export const StyledTransactionItem = styled.div`
   border-left: 1rem solid ${({color}) => color};
   border-radius: 0.7rem;
   background-color: ${({theme}) => theme.backgroundAccentColor};
-  box-shadow: ${({theme}) => theme.backgroundAccentColor === '#ffffff' ? '0 0 2px 1px #cccccc' : 'none'};
+  box-shadow: ${({theme}) => theme.name === 'light' ? '0 0 2px 1px #cccccc' : 'none'};
   color: ${({theme}) => theme.textColor};
-  h2 {
-    font-size: 2.5rem;
-    line-height: 1.5;
-  }
-  div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem;
-    font-size: 1.7rem;
-    line-height: 1.2;
-  }
-  @media (max-width: 600px) {
-    flex-direction: column;
+  animation: 0.5s ${fadeIn} forwards;
+
+  @media (min-width: 601px) {
+    flex-direction: row;
   }
 `;
 
 export const StyledTransactionCategory = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   gap: 0.5rem;
-  width: 20%;
-  span {
-    color: ${({color}) => color};
-    text-align: center;
-  }
-  @media (max-width: 600px) {
+  padding: 0.5rem;
+  font-size: 1.7rem;
+  line-height: 1.2;
+  min-width: 20%; 
+`;
+
+export const StyledTransactionInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 0.5rem;
+  font-size: 1.7rem;
+  line-height: 1.2;
+  min-width: 60%;
+  width: 90%;
+
+  @media (min-width: 601px) {
     width: auto;
   }
 `;
 
-export const StyledTransactionInfo = styled.div`
-  gap: 2rem;
-  min-width: 65%;
-  span:last-child {
-    color: ${({color}) => color};
+export const StyledTransactionButtons = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  font-size: 1.7rem;
+  line-height: 1.2;
+
+  svg {
+    cursor: pointer;
   }
 `;
 
-export const StyledTransactionButtons = styled.div`
-  gap: 1rem;
+export const StyledItemText = styled.span`
+  color: ${({color}) => color};
+  text-align: center;
 `;

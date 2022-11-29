@@ -59,7 +59,7 @@ const updateTransaction = async (req, res) => {
     return res.status(404).json({error: 'No such transaction'});
   }
 
-  const transaction = await Transaction.findByIdAndUpdate(id, {...req.body});
+  const transaction = await Transaction.findByIdAndUpdate(id, {...req.body}, {new: true});
 
   if (!transaction) {
     return res.status(404).json({error: 'No such transaction'});

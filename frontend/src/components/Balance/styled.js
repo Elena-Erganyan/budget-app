@@ -6,7 +6,7 @@ export const StyledBalanceWrapper = styled.div`
   width: 90%;
   margin-bottom: 1.5rem;
   border-radius: 0.7rem;
-  box-shadow: ${({theme}) => theme.backgroundAccentColor === '#ffffff' ? '0 0 2px 1px #cccccc' : 'none'};
+  box-shadow: ${({theme}) => theme.name === 'light' ? '0 0 2px 1px #cccccc' : 'none'};
 `;
 
 export const StyledBalance = styled.div`
@@ -17,16 +17,23 @@ export const StyledBalance = styled.div`
   background-color: ${({theme}) => theme.incomeAccentColor};
   color: ${({theme}) => theme.textColor};
   border-radius: 0.7rem 0.7rem 0 0;
-  h3 {
-    font-size: 2rem;
-    line-height: 1.5;
-  }
-  span {
-    font-size: 1.7rem;
-    line-height: 1.2;
-    font-weight: bold;
-    color: ${({theme}) => theme.backgroundAccentColor};
-  }
+`;
+
+export const StyledBalanceHeader = styled.h3`
+  font-size: 2rem;
+  line-height: 1.5;
+`;
+
+export const StyledBalanceAmount = styled.span`
+  font-size: 1.7rem;
+  line-height: 1.2;
+  font-weight: bold;
+  color: ${({theme, type}) => type === 'income'
+    ? theme.incomeColor 
+    : type === 'expense'
+      ? theme.expenseColor
+      : theme.backgroundAccentColor
+  };
 `;
 
 export const StyledIncomeExpenses = styled.div`
@@ -40,9 +47,6 @@ export const StyledIncome = styled(StyledBalance)`
   width: 50%;
   border-radius: 0 0 0 0.7rem;
   background-color: ${({theme}) => theme.backgroundAccentColor};
-  span {
-    color: ${({theme}) => theme.incomeColor};
-  }
   border: 3px solid ${({theme}) => theme.backgroundColor};
   border-left: none;
   border-bottom: none;
@@ -50,8 +54,5 @@ export const StyledIncome = styled(StyledBalance)`
 
 export const StyledExpenses = styled(StyledIncome)`
   border-radius: 0 0 0.7rem 0;
-  span {
-    color: ${({theme}) => theme.expenseColor};
-  }
   border-right: none;
 `;

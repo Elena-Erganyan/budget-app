@@ -1,11 +1,12 @@
-import React from 'react';
 import { useTransactionContext } from '../../context/globalState';
 import {
   StyledBalanceWrapper,
   StyledBalance,
+  StyledBalanceHeader,
+  StyledBalanceAmount,
   StyledIncomeExpenses,
   StyledIncome,
-  StyledExpenses
+  StyledExpenses,
 } from './styled';
 
 const Balance = () => {
@@ -18,17 +19,17 @@ const Balance = () => {
   return (
     <StyledBalanceWrapper>
       <StyledBalance>
-        <h3>Your balance</h3>
-        <span>{sign}${Math.abs(balance).toFixed(2)}</span>
+        <StyledBalanceHeader>Your balance</StyledBalanceHeader>
+        <StyledBalanceAmount>{sign}${Math.abs(balance).toFixed(2)}</StyledBalanceAmount>
       </StyledBalance>
       <StyledIncomeExpenses>
-        <StyledIncome>
-          <h3>Income</h3>
-          <span>${income}</span>
+        <StyledIncome >
+          <StyledBalanceHeader>Income</StyledBalanceHeader>
+          <StyledBalanceAmount  type='income'>${income}</StyledBalanceAmount>
         </StyledIncome>
         <StyledExpenses>
-          <h3>Expenses</h3>
-          <span>${expenses}</span>
+          <StyledBalanceHeader>Expenses</StyledBalanceHeader>
+          <StyledBalanceAmount type='expense'>${expenses}</StyledBalanceAmount>
         </StyledExpenses>
       </StyledIncomeExpenses>
     </StyledBalanceWrapper>

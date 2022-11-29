@@ -5,9 +5,10 @@ export const StyledTransactionHistory = styled.div`
   flex-direction: column;
   width: 90%;
   color: ${({theme}) => theme.textColor};
-  h2 {
-    margin-bottom: 1rem;
-    font-size: 2rem;
-    line-height: 1.5;
-  }
+`;
+
+export const StyledTransactionHistoryHeader = styled.h2`
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  line-height: 1.5;
 `;
