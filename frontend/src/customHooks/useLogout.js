@@ -1,7 +1,6 @@
 import { useTransactionContext } from '../context/globalState';
 import { useAuthContext } from '../context/authState';
 
-
 export const useLogout = () => {
   const { logoutUser } = useAuthContext();
   const { setTransactions } = useTransactionContext();
@@ -9,7 +8,6 @@ export const useLogout = () => {
   const logout = async () => {
     // remove user from storage
     localStorage.removeItem('user');
-    localStorage.removeItem('theme');
 
     // dispatch logout action
     logoutUser();
