@@ -10,6 +10,7 @@ import {
   StyledLoginHeader,
   StyledLoginText,
 } from '../Login/styled';
+import { StyledSmallText } from './styled';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -18,10 +19,10 @@ const Register = () => {
 
   const theme = useTheme();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    await register(email, password);
+    register(email, password);
   };
 
   return (
@@ -39,6 +40,9 @@ const Register = () => {
         onChange={(e) => setPassword(e.target.value)}
         value={password}
       />
+      <StyledSmallText>
+        Should consist of minimum 8 characters and include small and capital letters, numbers and symbols
+      </StyledSmallText>
       <Button
         color={theme.name === 'light' ? theme.expenseColors[2] : theme.incomeAccentColor}
         disabled={isLoading}

@@ -26,12 +26,13 @@ export const StyledTransactionForm = styled.form`
 export const StyledFieldsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
   gap: 2rem;
 
-  @media (max-width: 600px) {
-    flex-direction: column;
-    align-items: center;
+  @media (min-width: 601px) {
+    flex-direction: row;
+    align-items: flex-end;
   }
 `;
 
@@ -41,11 +42,7 @@ export const StyledTypesWrapper = styled.div`
   align-items: flex-end;
   gap: 2rem;
   position: relative;
-  width: 33%;
-
-  @media (max-width: 600px) {
-    width: auto;
-  }
+  width: 100%;
 `;
 
 export const StyledButtons = styled.div`
@@ -54,22 +51,14 @@ export const StyledButtons = styled.div`
   align-items: flex-end;
   gap: 2rem;
   position: relative;
-  width: 33%;
-
-  @media (max-width: 600px) {
-    width: auto;
-  }
+  width: 100%;
 `;
 
 export const StyledFormButton = styled(StyledButton)`
-  flex-grow: 1;
   order: ${({primary}) => primary ? 1 : 0};
-  width: ${({edit}) => edit ? 'auto' : '33%'};
   min-height: 3.4rem;
-
-  @media (max-width: 600px) {
-    width: auto;
-  }
+  width: ${({edit}) => edit ? 'auto' : '100%'};
+  flex-grow: ${({edit}) => edit ? '1' : '0'};
 `;
 
 export const StyledTransactionError = styled(StyledError)`

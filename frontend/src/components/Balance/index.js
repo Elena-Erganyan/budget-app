@@ -10,7 +10,7 @@ import {
 } from './styled';
 
 const Balance = () => {
-  const { transactions } = useTransactionContext() || [];
+  const { transactions } = useTransactionContext();
   const income = transactions.reduce((sum, item) => sum += (item.type === 'Income'? item.amount: 0), 0).toFixed(2);
   const expenses = transactions.reduce((sum, item) => sum += (item.type === 'Expense'? item.amount: 0), 0).toFixed(2);
   const balance = (income - expenses);

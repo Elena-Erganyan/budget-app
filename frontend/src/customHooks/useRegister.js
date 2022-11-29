@@ -19,17 +19,13 @@ export const useRegister = () => {
     const json = await response.json();
 
     if (!response.ok) {
-      setIsLoading(false);
       setError(json.error);
     } else {
-      // save the user to local storage
-      localStorage.setItem('user', JSON.stringify(json));
-
       // update the auth context
-      loginUser(json);
-      
-      setIsLoading(false);
+      loginUser(json);     
     }
+
+    setIsLoading(false);
   };
 
   return { register, isLoading, error };

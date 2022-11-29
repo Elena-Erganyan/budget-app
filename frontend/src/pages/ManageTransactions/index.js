@@ -6,7 +6,7 @@ import {
   StyledManageTransactionsWrapper,
   StyledStatisticsWrapper,
   StyledGraphWrapper,
-  StyledManageTransactions
+  StyledManageTransactions,
 } from './styled';
 
 const ManageTransactions = () => {

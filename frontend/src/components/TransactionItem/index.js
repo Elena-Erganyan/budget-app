@@ -24,10 +24,6 @@ const TransactionItem = ({item, setItemsToEdit}) => {
   const IconComponent = Icons[categoryIcons[category]];
 
   const deleteHandler = async (id) => {
-    if (!user) {
-      return;
-    }
-
     const response = await fetch('/api/transactions/' + id, {
       method: 'DELETE',
       headers: {

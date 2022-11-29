@@ -31,6 +31,7 @@ const Landing = () => {
 
   return (
     <StyledLanding>
+      
       <StyledLandingSection>
         <StyledLandingImage
           alt='Devices with the Budget App'
@@ -49,30 +50,37 @@ const Landing = () => {
           </Button>
         </StyledLandingTextWrapper>
       </StyledLandingSection>
+
       <StyledLandingSection features>
         <StyledLandingFeaturesWrapper>
           <StyledLandingSmallHeader>How it works</StyledLandingSmallHeader>
+          
           <StyledLandingFeatures>
             <StyledLandingFeatureContainer>
               <PlusCircle color={theme.incomeColors[2]} size={28} weight="duotone" />
               <StyledLandingFeature>Add your income and expenses day after day</StyledLandingFeature>
             </StyledLandingFeatureContainer>
+            
             <StyledLandingFeatureContainer>
               <Scales color={theme.incomeColors[2]} size={28} weight="duotone" />
               <StyledLandingFeature>Control your balance</StyledLandingFeature>
             </StyledLandingFeatureContainer>
+            
             <StyledLandingFeatureContainer>
               <ChartLineUp color={theme.incomeColors[2]} size={28} weight="duotone" />
               <StyledLandingFeature>Use charts for any period of time</StyledLandingFeature>
             </StyledLandingFeatureContainer>
+            
             <StyledLandingFeatureContainer>
               <ChartPieSlice color={theme.incomeColors[2]} size={28} weight="duotone" />
               <StyledLandingFeature>See the structure of your income and expenses</StyledLandingFeature>
             </StyledLandingFeatureContainer>
+            
             <StyledLandingFeatureContainer>
               <DesktopTower color={theme.incomeColors[2]} size={28} weight="duotone" />
               <StyledLandingFeature>Use the app from any device</StyledLandingFeature>
             </StyledLandingFeatureContainer>
+            
           </StyledLandingFeatures>
         </StyledLandingFeaturesWrapper>
         <StyledLandingImage

@@ -6,54 +6,63 @@ export const StyledNavbar = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
-  width: 90%;
-  
+  width: auto;
+  gap: 0;
+
   & > svg {
-    display: none;
+    display: block;
+    cursor: pointer;
   }
 
-  @media (max-width: 900px) {
-    width: auto;
-    gap: 0;
+  @media (min-width: 901px) {
+    gap: 1rem;
+    width: 90%;
+  
     & > svg {
-      display: block;
-      cursor: pointer;
+      display: none;
     }
   }
 `;
 
 export const StyledMenu = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   gap: 1rem;
 
+  z-index: 2;
+  position: fixed;
+  left: -100%;
+  top: 0;
+  bottom: 0;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 80%;
+  padding: 1.5rem;
+  background-color: ${({theme}) => theme.backgroundAccentColor};
+  transition: 0.5s all ease;
+
   svg {
-    display: none;
+    display: block;
     position: absolute;
     top: 2rem;
     right: 1rem;
     cursor: pointer;
   }
 
-  @media (max-width: 900px) {
-    position: relative;
-    z-index: 2;
-    position: fixed;
-    left: -100%;
-    top: 0;
-    bottom: 0;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    width: 80%;
-    padding: 1.5rem;
-    background-color: ${({theme}) => theme.backgroundAccentColor};
-    transition: 0.5s all ease;
+  @media (min-width: 901px) {
+    position: static;
+    z-index: 0;
+    left: auto;
+    top: auto;
+    bottom: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: auto;
+    transition: none;
 
     svg {
-      display: block;
+      display: none;
     }
   }
 `;
@@ -75,7 +84,7 @@ export const StyledLogoText = styled.span`
 `;
 
 export const StyledLink = styled(Link)`
-  display: ${({inner}) => inner ? 'none' : 'block'};
+  display: block;
   padding: ${({inner}) => inner ? '0 1rem' : '1rem'};
   font-size: 2rem;
   line-height: 1.2;
@@ -84,22 +93,26 @@ export const StyledLink = styled(Link)`
   color: ${({status, theme}) => status === 'active' ? theme.expenseColor : theme.expenseAccentColor};
   cursor: ${({status}) => status === 'active' ? 'auto' : 'pointer'};
 
-  @media (max-width: 900px) {
-    display: block;
+  @media (min-width: 901px) {
+    display: ${({inner}) => inner ? 'none' : 'block'};
   }
 `;
 
 export const StyledNavButton = styled(StyledButton)`
-  @media (max-width: 900px) {
-    padding: 1rem;
-    font-size: 2rem;
-    line-height: 1.2;
-    text-decoration: none;
-    text-align: center;
-    color: ${({status, theme}) => status === 'active' ? theme.expenseColor : theme.expenseAccentColor};
-    cursor: ${({status}) => status === 'active' ? 'auto' : 'pointer'};
-    border: none;
-    background-color: transparent;
+  padding: 1rem;
+  font-size: 2rem;
+  line-height: 1.2;
+  text-decoration: none;
+  text-align: center;
+  color: ${({status, theme}) => status === 'active' ? theme.expenseColor : theme.expenseAccentColor};
+  cursor: ${({status}) => status === 'active' ? 'auto' : 'pointer'};
+  border: none;
+  background-color: transparent;
+
+  @media (min-width: 901px) {
+    border: 2px solid ${({color}) => color};
+    background-color: ${({primary, color}) => primary ? color : 'transparent'};
+    color: ${({primary, color, theme})  => primary ? theme.backgroundAccentColor : color};
   }
 `;
 

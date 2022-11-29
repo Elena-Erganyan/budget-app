@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from 'react';
+import { useAuthContext } from './authState';
 import reducer from './reducer';
 
 const initialState = {
@@ -29,18 +30,30 @@ const initialState = {
     'Mobile service': 'DeviceMobile',
     'Other expenses': 'Receipt',
   },
+  formData: {
+    date: new Date().toISOString().split('T')[0],
+    type: 'Income',
+    category: 'Salary',
+    title: '',
+    amount: '',
+  },
   filters: {
     type: 'Income',
     category: 'All',
-    startDate: new Date().toISOString().split('T')[0],
+    startDate: '', // is set in the GlobalProvider below, because we can't use hooks on the top level 
     endDate: new Date().toISOString().split('T')[0],
     sortType: 'dateDesc',
   },
 };
 
-export const GlobalContext = createContext(initialState);
+const GlobalContext = createContext(initialState);
 
 export const GlobalProvider = ({ children }) => {
+  const { user } = useAuthContext();
+  if (user) {
+    initialState.filters.startDate = user.createdAt.split('T')[0];
+  }
+
   const [state, dispatch] = useReducer(reducer, initialState);
 
   function setTransactions(items) {
@@ -71,6 +84,13 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
+  function saveFormData(data) {
+    dispatch({
+      type: 'SAVE_FORM_DATA',
+      payload: data,
+    });
+  }
+
   function saveFilters(filters) {
     dispatch({
       type: 'SAVE_FILTERS',
@@ -88,6 +108,8 @@ export const GlobalProvider = ({ children }) => {
       deleteTransaction,
       addTransaction,
       replaceTransaction,
+      formData: state.formData,
+      saveFormData,
       filters: state.filters,
       saveFilters,
     }}>

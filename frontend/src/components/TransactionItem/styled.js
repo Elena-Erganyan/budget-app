@@ -1,7 +1,9 @@
 import styled from 'styled-components';
+import { fadeIn } from '../../components/generalAnimations';
 
 export const StyledTransactionItem = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
@@ -12,9 +14,10 @@ export const StyledTransactionItem = styled.div`
   background-color: ${({theme}) => theme.backgroundAccentColor};
   box-shadow: ${({theme}) => theme.name === 'light' ? '0 0 2px 1px #cccccc' : 'none'};
   color: ${({theme}) => theme.textColor};
+  animation: 0.5s ${fadeIn} forwards;
 
-  @media (max-width: 600px) {
-    flex-direction: column;
+  @media (min-width: 601px) {
+    flex-direction: row;
   }
 `;
 
@@ -39,9 +42,10 @@ export const StyledTransactionInfo = styled.div`
   font-size: 1.7rem;
   line-height: 1.2;
   min-width: 60%;
+  width: 90%;
 
-  @media (max-width: 600px) {
-    width: 90%;
+  @media (min-width: 601px) {
+    width: auto;
   }
 `;
 

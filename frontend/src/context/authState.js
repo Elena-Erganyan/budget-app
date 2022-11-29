@@ -3,7 +3,7 @@ import authReducer from './authReducer';
 
 const initialState = {user: JSON.parse(localStorage.getItem('user'))};
 
-export const AuthContext = createContext(initialState);
+const AuthContext = createContext(initialState);
 
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
@@ -21,11 +21,18 @@ export const AuthContextProvider = ({ children }) => {
     });
   }
 
+  function updateUser () {
+    dispatch({
+      type: 'UPDATE',
+    });
+  }
+
   return (
     <AuthContext.Provider value={{
       user: state.user,
       loginUser,
       logoutUser,
+      updateUser,
     }}>
       {children}
     </AuthContext.Provider>

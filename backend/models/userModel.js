@@ -14,6 +14,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  theme: {
+    type: String,
+    default: 'light',
+  },
 }, { timestamps: true });
 
 // static register method

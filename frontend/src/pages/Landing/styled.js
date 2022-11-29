@@ -6,29 +6,30 @@ export const StyledLanding = styled.div`
   gap: 4rem;
   width: 100%;
   max-width: 90rem;
-  padding: 0 2rem;
+  padding: 2rem;
 `;
 
 export const StyledLandingSection = styled.div`
   display: flex;
-  flex-direction: ${({features}) => features ? 'row' : 'column'};
-  justify-content: ${({features}) => features ? 'center' : 'flex-start'};
+  flex-direction: column;
+  justify-content: flex-start;
+  
   align-items: center;
   gap: 2rem;
 
-  @media (max-width: 600px) {
-    flex-direction: column;
-    justify-content: flex-start;
+  @media (min-width: 601px) {
+    flex-direction: ${({features}) => features ? 'row' : 'column'};
+    justify-content: ${({features}) => features ? 'center' : 'flex-start'};
   }
 `;
 
 export const StyledLandingImage = styled.img`
-  margin-top: -2rem;
-  width: ${({features}) => features ? '30%' : '100%'};
-
-  @media (max-width: 600px) {
-    margin-top: 0;
-    width: ${({features}) => features ? '70%' : '100%'};
+  margin-top: 0;
+  width: ${({features}) => features ? '70%' : '100%'};
+  
+  @media (min-width: 601px) {
+    margin-top: -2rem;
+    width: ${({features}) => features ? '30%' : '100%'};
   }
 `;
 
@@ -56,9 +57,10 @@ export const StyledLandingFeaturesWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 3rem;
+  order: 1;
 
-  @media (max-width: 600px) {
-    order: 1;
+  @media (min-width: 601px) {
+    order: 0;
   }
 `;
 
@@ -85,8 +87,9 @@ export const StyledLandingFeatureContainer = styled.li`
 export const StyledLandingFeature = styled.p`
   font-size: 2.5rem;
   line-height: 1.5;
+  width: 80%;
 
-  @media (max-width: 600px) {
-    width: 80%;
+  @media (min-width: 601px) {
+    width: auto;
   }
 `;

@@ -23,14 +23,14 @@ const Page404 = () => {
         <Styled404SmallHeader>Page not found</Styled404SmallHeader>
         <Styled404Text>Probably it's not you are searching for :)</Styled404Text>
         <PawPrint size={28} weight="duotone" />
-      <Styled404Button
-        color={theme.incomeColors[2]}
-        as={Link}
-        primary='true'
-        to='/'
-      >
-        Go home
-      </Styled404Button>
+        <Styled404Button
+          color={theme.incomeColors[2]}
+          as={Link}
+          primary='true'
+          to='/'
+        >
+          Go home
+        </Styled404Button>
       </Styled404TextWrapper>
     </Styled404>
   );

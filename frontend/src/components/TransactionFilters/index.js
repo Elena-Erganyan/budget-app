@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useTransactionContext } from '../../context/globalState';
-import { useAuthContext } from '../../context/authState';
 import { filterTransactions } from './utils';
 import Input from '../Input';
 import { StyledManageTransactionsForm } from './styled';
@@ -15,13 +14,12 @@ const TransactionFilters = ({setFilteredTransactions}) => {
     filters,
     saveFilters,
   } = useTransactionContext();
-  const { user } = useAuthContext();
 
   const theme = useTheme();
   
   const [type, setType] = useState(filters.type);
   const [category, setCategory] = useState(filters.category);
-  const [startDate, setStartDate] = useState(user.createdAt.split('T')[0]);
+  const [startDate, setStartDate] = useState(filters.startDate);
   const [endDate, setEndDate] = useState(filters.endDate);
   const [sortType, setSortType] = useState(filters.sortType);
 
@@ -46,6 +44,7 @@ const TransactionFilters = ({setFilteredTransactions}) => {
             checked={type === 'Income'}
             color={theme.incomeColor}
             id="incomeFilter"
+            isSwitch={true}
             name="transactionType"
             onChange={() => typeHandler('Income')}
             text="Income"
@@ -54,6 +53,7 @@ const TransactionFilters = ({setFilteredTransactions}) => {
           <Input
             checked={type === 'Expense'}
             color={theme.expenseColor}
+            isSwitch={true}
             id="expenseFilter"
             name="transactionType"
             onChange={() => typeHandler('Expense')}

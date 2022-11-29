@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTransactionContext } from '../../context/globalState';
 import { useAuthContext } from '../../context/authState';
 import Input from '../Input';
@@ -15,27 +15,36 @@ import {
 import { useTheme } from 'styled-components';
 
 const TransactionForm = ({item, setItemsToEdit}) => {
-  
-  const [date, setDate] = useState((item && item.date) || new Date().toISOString().split('T')[0]);
-  const [title, setTitle] = useState((item && item.title) || '');
-  const [amount, setAmount] = useState((item && item.amount) || '');
-  const [type, setType] = useState((item && item.type) || 'Income');
-  const [category, setCategory] = useState((item && item.category) || 'Salary');
-  const [error, setError] = useState(null);
-  const [emptyFields, setEmptyFields] = useState([]);
 
   const {
     addTransaction,
     replaceTransaction,
     incomeCategories,
-    expenseCategories
+    expenseCategories,
+    formData,
+    saveFormData,
   } = useTransactionContext();
 
   const { user } = useAuthContext();
 
   const theme = useTheme();
 
+  const [date, setDate] = useState(item?.date || formData.date);
+  const [title, setTitle] = useState(item?.title || formData.title);
+  const [amount, setAmount] = useState(item?.amount || formData.amount);
+  const [type, setType] = useState(item?.type || formData.type);
+  const [category, setCategory] = useState(item?.category || formData.category);
+  const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState([]);
+
   const categories = type === 'Income' ? incomeCategories : expenseCategories;
+
+  useEffect(() => {
+    if (!item) {
+      saveFormData({date, type, category, title, amount});
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [date, type, category, title, amount]);
 
   const typeHandler = (type) => {
     setType(type);
@@ -44,11 +53,6 @@ const TransactionForm = ({item, setItemsToEdit}) => {
 
   const onSubmit = async (evt) => {
     evt.preventDefault();
-
-    if (!user) {
-      setError('You must be logged in');
-      return;
-    }
     
     const transaction = {
       date,
@@ -140,6 +144,7 @@ const TransactionForm = ({item, setItemsToEdit}) => {
           <StyledTypesWrapper>
             <Input
               id={item ? 'income' + item._id : 'income'}
+              isSwitch={true}
               checked={type === 'Income'}
               color={theme.incomeColor}
               name={item ? 'type' + item._id : 'type'}
@@ -149,6 +154,7 @@ const TransactionForm = ({item, setItemsToEdit}) => {
             />
             <Input
               id={item ? 'expense' + item._id : 'expense'}
+              isSwitch={true}
               checked={type === 'Expense'}
               color={theme.expenseColor}
               name={item ? 'type' + item._id : 'type'}

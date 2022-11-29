@@ -14,14 +14,15 @@ import {
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isRemembered, setIsRemembered] = useState(false);
   const { login, isLoading, error } = useLogin();
 
   const theme = useTheme();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    await login(email, password);
+    login(email, password, isRemembered);
   };
 
   return (
@@ -38,6 +39,15 @@ const Login = () => {
         type="password"
         onChange={(e) => setPassword(e.target.value)}
         value={password}
+      />
+      <Input
+        checked={isRemembered}
+        id="rememberMe"
+        isCheckbox={true}
+        name="rememberMe"
+        text="remember me"
+        type="checkbox"
+        onChange={() => setIsRemembered(!isRemembered)}
       />
       <Button
         color={theme.name === 'light' ? theme.expenseColors[2] : theme.incomeColor}

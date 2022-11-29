@@ -10,6 +10,8 @@ const Input = ({
   id,
   name,
   checked,
+  isSwitch,
+  isCheckbox,
   color,
   pattern,
   options,
@@ -28,7 +30,7 @@ const Input = ({
   };
 
   return (
-    type === 'radio' 
+    type === 'radio' || type === 'checkbox'
       ? (
         <>
           <StyledInput
@@ -40,10 +42,11 @@ const Input = ({
             type={type}
             value={value}
           />
-          <StyledLabel 
+          <StyledLabel
             color={color}
             htmlFor={id}
-            isSwitch
+            isCheckbox={isCheckbox}
+            isSwitch={isSwitch}
           >
             {text}
           </StyledLabel>

@@ -6,7 +6,7 @@ export const useLogin = () => {
   const [isLoading, setIsLoading] = useState(null);
   const { loginUser } = useAuthContext();
 
-  const login = async (email, password) => {
+  const login = async (email, password, isRemembered) => {
     setIsLoading(true);
     setError(null);
 
@@ -19,17 +19,18 @@ export const useLogin = () => {
     const json = await response.json();
 
     if (!response.ok) {
-      setIsLoading(false);
       setError(json.error);
     } else {
       // save the user to local storage
-      localStorage.setItem('user', JSON.stringify(json));
+      if (isRemembered) {
+        localStorage.setItem('user', JSON.stringify(json));
+      }
 
       // update the auth context
-      loginUser(json);
-      
-      setIsLoading(false);
+      loginUser(json);     
     }
+
+    setIsLoading(false);
   };
 
   return { login, isLoading, error };

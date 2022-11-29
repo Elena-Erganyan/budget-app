@@ -3,22 +3,23 @@ import { StyledButton } from "../../components/Button/styled";
 
 export const Styled404 = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  min-height: calc(100vh - 10rem);
+  min-height: calc(100vh - 10rem); // subtracting the height of the header
   padding: 2rem;
 
-  @media (max-width: 600px) {
-    flex-direction: column;
+  @media (min-width: 601px) {
+    flex-direction: row;
   }
 `;
 
 export const Styled404Image = styled.img`
-  width: 50%;
+  width: 85%;
 
-  @media (max-width: 600px) {
-    width: 85%;
+  @media (min-width: 601px) {
+    width: 50%;
   }
 `;
 

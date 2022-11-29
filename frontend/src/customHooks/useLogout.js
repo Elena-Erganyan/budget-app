@@ -9,10 +9,11 @@ export const useLogout = () => {
   const logout = async () => {
     // remove user from storage
     localStorage.removeItem('user');
+    localStorage.removeItem('theme');
 
     // dispatch logout action
     logoutUser();
-    setTransactions(null);
+    setTransactions([]);
   };
 
   return { logout };
