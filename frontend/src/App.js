@@ -41,7 +41,7 @@ function App() {
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <GlobalStyles/>
-      <BrowserRouter basename={'/budget-app'}>
+      <BrowserRouter>
         <Header theme={theme} toggleTheme={toggleTheme} />
         <Routes>
           <Route path="/" element={user ? <Home /> : <Landing />} />
