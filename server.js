@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const transactionsRoutes = require('./routes/transactionsRoutes');
 const userRoutes = require('./routes/userRoutes');
+const path = require('path');
 
 // express app
 const app = express();
@@ -17,6 +18,7 @@ app.use((req, res, next) => {
 });
 
 // routes
+app.use(express.static(path.join(__dirname, 'frontend/build')));
 app.use('/api/user', userRoutes);
 app.use('/api/transactions', transactionsRoutes);
 
