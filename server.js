@@ -11,8 +11,9 @@ const path = require('path');
 const app = express();
 
 // middleware
-app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, './frontend/build')));
+app.use(cors());
 
 app.use((req, res, next) => {
   console.log(req.path, req.method);
@@ -20,9 +21,13 @@ app.use((req, res, next) => {
 });
 
 // routes
-app.use(express.static(path.join(__dirname, 'frontend/build')));
 app.use('/api/user', userRoutes);
 app.use('/api/transactions', transactionsRoutes);
+
+// Return the client
+app.get('/*', (_, res) => {
+  res.sendFile(path.join(__dirname, './frontend/build') + '/index.html');
+});
 
 // connect to db
 mongoose.connect(process.env.MONGODB_URI)
