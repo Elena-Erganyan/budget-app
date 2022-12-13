@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useLogin } from '../../customHooks/useLogin';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
-import Error from '../../components/Error';
+import Message from '../../components/Message';
 import { useTheme } from 'styled-components';
 import {
   StyledLoginForm,
@@ -59,7 +59,8 @@ const Login = () => {
       <StyledLoginText>
         Don't have an account yet? <StyledLoginLink to='/register'>Register</StyledLoginLink>
       </StyledLoginText>
-      {error && <Error>{error}</Error>}
+      {error && <Message color="crimson">{error}</Message>}
+      {}
     </StyledLoginForm>
   );
 };

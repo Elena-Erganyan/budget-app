@@ -184,7 +184,7 @@ const TransactionForm = ({item, setItemsToEdit}) => {
           </StyledButtons>
           : <StyledFormButton color={theme.expenseAccentColor} primary>Add transaction</StyledFormButton>}
         </StyledFieldsWrapper>
-        {error && <StyledTransactionError>{error}</StyledTransactionError>}
+        {error && <StyledTransactionError color="crimson">{error}</StyledTransactionError>}
       </StyledTransactionForm>
     </StyledTransactionWrapper>
   );

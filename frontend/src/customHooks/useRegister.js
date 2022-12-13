@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import { useAuthContext } from '../context/authState';
 
 export const useRegister = () => {
   const [error, setError] = useState(null);
+  const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
-  const { loginUser } = useAuthContext();
 
   const register = async (email, password) => {
     setIsLoading(true);
     setError(null);
+    setMessage(null);
 
     const response = await fetch('/api/user/register', {
       method: 'POST',
@@ -21,12 +21,11 @@ export const useRegister = () => {
     if (!response.ok) {
       setError(json.error);
     } else {
-      // update the auth context
-      loginUser(json);     
+      setMessage(json.message);
     }
 
     setIsLoading(false);
   };
 
-  return { register, isLoading, error };
+  return { register, isLoading, error, message };
 };

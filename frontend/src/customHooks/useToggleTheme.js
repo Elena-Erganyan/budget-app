@@ -14,7 +14,7 @@ export const useToggleTheme = () => {
     window.localStorage.setItem('theme', mode);
     setTheme(mode);
     if (user) {
-      const response = await fetch('/api/user/' + user.id, {
+      const response = await fetch('/api/user/' + user._id, {
         method: 'PATCH',
         body: JSON.stringify({theme: mode}),
         headers: {
@@ -27,8 +27,10 @@ export const useToggleTheme = () => {
 
       if (!response.ok) {
         console.log(json.error);
-      } else if (window.localStorage.getItem('user')) {
-        window.localStorage.setItem('user', JSON.stringify({...json, token: user.token}));
+      } else {
+        if (window.localStorage.getItem('user')) {
+          window.localStorage.setItem('user', JSON.stringify({...json, token: user.token}));
+        }
         updateUser({theme: json.theme});
       }
     }

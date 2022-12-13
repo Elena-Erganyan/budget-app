@@ -14,3 +14,6 @@ root.render(
     </AuthContextProvider>
   </React.StrictMode>
 );
+
+// React.StrictMode renders App.js twice, that's why email confirmation can be done twice
+// in the development mode

@@ -7,6 +7,7 @@ import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Page404 from './pages/Page404';
+import Welcome from './pages/Welcome';
 import { useTransactionContext } from './context/globalState';
 import { useAuthContext } from './context/authState';
 import GlobalStyles from './GlobalStyles';
@@ -32,6 +33,7 @@ function App() {
         setTransactions(json);
       }
     };
+
     if (user) {
       fetchTransactions();
     }
@@ -48,6 +50,7 @@ function App() {
           <Route path="/manage-transactions" element={user ? <ManageTransactions /> : <Navigate to="/login" />} />
           <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
           <Route path="/register" element={!user ? <Register /> : <Navigate to="/" />} />
+          <Route path="/confirm/:confirmationCode" element={<Welcome />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>

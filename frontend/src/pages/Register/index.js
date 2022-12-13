@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useRegister} from '../../customHooks/useRegister';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
-import Error from '../../components/Error';
+import Message from '../../components/Message';
 import { useTheme } from 'styled-components';
 import {
   StyledLoginForm,
@@ -15,7 +15,7 @@ import { StyledSmallText } from './styled';
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { register, isLoading, error } = useRegister();
+  const { register, isLoading, error, message } = useRegister();
 
   const theme = useTheme();
 
@@ -53,7 +53,8 @@ const Register = () => {
       <StyledLoginText>
         Have an account already? <StyledLoginLink to='/login'>Log in</StyledLoginLink>
       </StyledLoginText>
-      {error && <Error>{error}</Error>}
+      {error && <Message color="crimson">{error}</Message>}
+      {message && <Message color={theme.incomeColor}>{message}</Message>}
     </StyledLoginForm>
   );
 };

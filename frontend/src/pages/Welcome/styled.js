@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Styled404 = styled.div`
+export const StyledWelcome = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,7 +14,7 @@ export const Styled404 = styled.div`
   }
 `;
 
-export const Styled404Image = styled.img`
+export const StyledWelcomeImage = styled.img`
   width: 85%;
 
   @media (min-width: 601px) {
@@ -22,7 +22,7 @@ export const Styled404Image = styled.img`
   }
 `;
 
-export const Styled404TextWrapper = styled.div`
+export const StyledWelcomeWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,15 +31,6 @@ export const Styled404TextWrapper = styled.div`
   text-align: center;
 `;
 
-export const Styled404Header = styled.h1`
+export const StyledWelcomeHeader = styled.h1`
   font-size: 7rem;
-`;
-
-export const Styled404SmallHeader = styled.h2`
-  font-size: 3rem;
-  text-transform: capitalize;
-`;
-
-export const Styled404Text = styled.p`
-  font-size: 1.7rem;
 `;
