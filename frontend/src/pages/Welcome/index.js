@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import Button from '../../components/Button';
 import { useTheme } from "styled-components";
 import {
   StyledWelcome,
   StyledWelcomeWrapper,
   StyledWelcomeImage,
   StyledWelcomeHeader,
-  StyledWelcomeButton,
 } from "./styled";
 import congrats from '../../images/congrats.jpg';
 
@@ -41,14 +41,15 @@ const Welcome = () => {
         <StyledWelcomeHeader>
           {message}
         </StyledWelcomeHeader>
-        <StyledWelcomeButton
+        <Button
           color={theme.incomeColors[2]}
           as={Link}
-          primary='true'
+          primary="true"
+          style={{marginTop: '2rem'}}
           to={isSuccessful ? '/login' : '/'}
         >
           {isSuccessful ? 'Login' : 'Go home'}
-        </StyledWelcomeButton>
+        </Button>
       </StyledWelcomeWrapper>
     </StyledWelcome>
   );

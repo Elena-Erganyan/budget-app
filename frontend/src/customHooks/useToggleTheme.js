@@ -14,7 +14,7 @@ export const useToggleTheme = () => {
     window.localStorage.setItem('theme', mode);
     setTheme(mode);
     if (user) {
-      const response = await fetch('/api/user/' + user.id, {
+      const response = await fetch('/api/user/' + user._id, {
         method: 'PATCH',
         body: JSON.stringify({theme: mode}),
         headers: {

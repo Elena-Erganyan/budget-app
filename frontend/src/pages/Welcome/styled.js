@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { StyledButton } from "../../components/Button/styled";
 
 export const StyledWelcome = styled.div`
   display: flex;
@@ -34,8 +33,4 @@ export const StyledWelcomeWrapper = styled.div`
 
 export const StyledWelcomeHeader = styled.h1`
   font-size: 7rem;
-`;
-
-export const StyledWelcomeButton = styled(StyledButton)`
-  margin-top: 2rem;
 `;

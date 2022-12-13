@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { StyledButton } from "../../components/Button/styled";
 
 export const Styled404 = styled.div`
   display: flex;
@@ -43,8 +42,4 @@ export const Styled404SmallHeader = styled.h2`
 
 export const Styled404Text = styled.p`
   font-size: 1.7rem;
-`;
-
-export const Styled404Button = styled(StyledButton)`
-  margin-top: 2rem;
 `;

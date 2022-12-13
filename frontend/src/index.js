@@ -6,9 +6,14 @@ import { AuthContextProvider } from './context/authState';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <AuthContextProvider>
-    <GlobalProvider>
-      <App />
-    </GlobalProvider>
-  </AuthContextProvider>
+  <React.StrictMode>
+    <AuthContextProvider>
+      <GlobalProvider>
+        <App />
+      </GlobalProvider>
+    </AuthContextProvider>
+  </React.StrictMode>
 );
+
+// React.StrictMode renders App.js twice, that's why email confirmation can be done twice
+// in the development mode
