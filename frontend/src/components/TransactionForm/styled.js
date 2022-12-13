@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { StyledButton } from "../Button/styled";
-import { StyledError } from '../Error/styled';
+import { StyledMessage } from "../Message/styled";
 
 export const StyledTransactionWrapper = styled.div`
   display: flex;
@@ -61,6 +61,6 @@ export const StyledFormButton = styled(StyledButton)`
   flex-grow: ${({edit}) => edit ? '1' : '0'};
 `;
 
-export const StyledTransactionError = styled(StyledError)`
+export const StyledTransactionError = styled(StyledMessage)`
   align-self: center;
 `;

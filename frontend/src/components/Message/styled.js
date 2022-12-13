@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export const StyledError = styled.div`
+export const StyledMessage = styled.div`
   padding: 0.5rem;
   margin: 2rem 0;
   font-size: 1.7rem;
-  color: crimson;
-  border: 2px solid crimson;
+  color: ${({color}) => color};
+  border: 2px solid  ${({color}) => color};
   border-radius: 0.3rem;
 `;

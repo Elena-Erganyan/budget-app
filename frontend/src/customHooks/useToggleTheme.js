@@ -27,8 +27,10 @@ export const useToggleTheme = () => {
 
       if (!response.ok) {
         console.log(json.error);
-      } else if (window.localStorage.getItem('user')) {
-        window.localStorage.setItem('user', JSON.stringify({...json, token: user.token}));
+      } else {
+        if (window.localStorage.getItem('user')) {
+          window.localStorage.setItem('user', JSON.stringify({...json, token: user.token}));
+        }
         updateUser({theme: json.theme});
       }
     }
