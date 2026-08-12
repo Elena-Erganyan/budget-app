@@ -82,7 +82,7 @@ const verifyUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const { id } = req.params;
   
-  const user = await User.findByIdAndUpdate(id, {...req.body}, {new: true});
+  const user = await User.findByIdAndUpdate(id, {...req.body}, {new: true, lean: true, select: {id: 1, token: 1, theme: 1, email: 1, createdAt: 1}});
 
   if (!user) {
     return res.status(404).json({error: 'No such user'});

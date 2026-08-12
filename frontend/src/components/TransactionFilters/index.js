@@ -90,8 +90,8 @@ const TransactionFilters = ({setFilteredTransactions}) => {
         <Input
           onChange={(evt) => setSortType(evt.target.value)}
           options={[
-            {value: 'dateDesc', text: 'Date (oldest)'},
-            {value: 'dateAsc', text: 'Date (newest)'},
+            {value: 'dateAsc', text: 'Date (oldest)'},
+            {value: 'dateDesc', text: 'Date (newest)'},
             {value: 'amountAsc', text: 'Amount (lowest)'},
             {value: 'amountDesc', text: 'Amount (highest)'},
           ]}

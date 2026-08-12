@@ -1,9 +1,9 @@
 export const sortTransactions = (a, b, sortType) => {
   switch(sortType) {
     case 'dateAsc':
-      return b.date - a.date;
+      return new Date(a.date) - new Date(b.date);
     case 'dateDesc':
-      return a.date - b.date;
+      return new Date(b.date) - new Date(a.date);
     case 'amountAsc':
       return a.amount - b.amount;
     case 'amountDesc':
@@ -22,17 +22,14 @@ export const filterTransactions = (
   endDate,
   sortType
 ) => {
-  if (category === 'All') {
-    setFilteredTransactions(transactions.filter((item) => {
-      return type === item.type &&
-        new Date(item.date) >= new Date(startDate + 'T00:00:00Z') &&
-        new Date(item.date) <= new Date(endDate + 'T23:59:59Z');
-    }).sort((a, b) => sortTransactions(a, b, sortType)));
-  } else {
-    setFilteredTransactions(transactions.filter((item) => {
-      return category === item.category &&
-        new Date(item.date) >= new Date(startDate + 'T00:00:00Z') &&
-        new Date(item.date) <= new Date(endDate + 'T23:59:59Z');
-    }).sort((a, b) => sortTransactions(a, b, sortType)));
-  }
+  const start = new Date(startDate + 'T00:00:00Z');
+  const end = new Date(endDate + 'T23:59:59Z');
+
+  setFilteredTransactions(transactions.filter((item) => {
+    const filter = category === 'All' ? type === item.type : category === item.category;
+    const itemDate = new Date(item.date);
+    return filter &&
+      itemDate >= start &&
+      itemDate <= end;
+  }).sort((a, b) => sortTransactions(a, b, sortType)));
 };
